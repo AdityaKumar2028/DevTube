@@ -57,3 +57,5 @@ export const sidebarOptions = [
     query: "software engineering interview preparation",
   },
 ];
+
+export const BASE_URL = "https://www.googleapis.com/youtube/v3";

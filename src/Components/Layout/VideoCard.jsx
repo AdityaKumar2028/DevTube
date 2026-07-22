@@ -1,9 +1,8 @@
 const VideoCard = ({ props }) => {
-  console.log(props);
-  const { videoId } = props.id;
-  const { snippet } = props;
-  console.log(videoId);
+  const { snippet } = props.searchData;
   const { publishTime, title, thumbnails } = snippet;
+  const { duration } = props.contentDetails;
+  const { viewCount } = props.statistics;
   return (
     <div className="videoCard-container border border-black p-4">
       {" "}
@@ -15,6 +14,10 @@ const VideoCard = ({ props }) => {
       <div className="flex flex-col w-72">
         <span>{title}</span>
         <span>Uploaded On: {publishTime}</span>
+        <div className="flex flex-row gap-1">
+          <span>duration: {duration}</span>
+          <span>views: {viewCount}</span>
+        </div>
       </div>
     </div>
   );

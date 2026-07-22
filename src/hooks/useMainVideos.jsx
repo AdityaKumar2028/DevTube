@@ -10,8 +10,7 @@ export const useMainVideos = (query) => {
     const fetchMainVideos = async () => {
       try {
         const result = await getMainVideos(query);
-        console.log(result.items);
-        dispatch(setMainVideos(result.items));
+        dispatch(setMainVideos(result));
       } catch (error) {
         console.error(error);
       }

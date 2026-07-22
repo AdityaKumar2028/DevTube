@@ -13,7 +13,6 @@ const Sidebar = () => {
   }, []);
   useMainVideos(selectedOption.query);
   function handleSidebarOptionsClick(title, query) {
-    console.log(title, query);
     setSelectedOption({ title, query });
   }
 
