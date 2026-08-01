@@ -1,15 +1,33 @@
+// VideoContainer.jsx
 import { useSelector } from "react-redux";
 import VideoCard from "../Layout/VideoCard";
 
 const VideoContainer = () => {
   const videoData = useSelector((store) => store.videos.mainVideos);
+  const isNavBarOpen = useSelector((store) => store.app.isMenuOpen);
+
   if (!videoData) return null;
-  console.log(videoData);
+
   return (
-    <div className="videoContainer grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {videoData.map((videoContent) => (
-        <VideoCard props={videoContent} key={videoContent.id} />
-      ))}
+    <div
+      className={`flex-1 min-h-screen bg-white transition-all duration-300 ${isNavBarOpen ? "ml-0" : "ml-4"}`}
+    >
+      <div
+        className={`py-5 transition-all duration-300 ${
+          isNavBarOpen ? "px-3" : "px-6"
+        }`}
+      >
+        <div
+          className="grid gap-x-5 gap-y-3"
+          style={{
+            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+          }}
+        >
+          {videoData.map((video) => (
+            <VideoCard key={video.id} props={video} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

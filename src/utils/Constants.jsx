@@ -19,7 +19,7 @@ export const sidebarOptions = [
   {
     title: "Trending",
     icon: Flame,
-    query: "trending programming",
+    query: "trending programming coding latest",
   },
   {
     title: "Web Development",
