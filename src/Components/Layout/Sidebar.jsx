@@ -1,19 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sidebarOptions } from "../../utils/Constants";
-import { useEffect, useState } from "react";
 import { useMainVideos } from "../../hooks/useMainVideos";
+import { setMenuOption } from "../../utils/appSlice";
 const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
-  const [selectedOption, setSelectedOption] = useState({
-    title: "Home",
-    query: "Programming",
-  });
-  useEffect(() => {
-    handleSidebarOptionsClick("Home", "Programming");
-  }, []);
-  useMainVideos(selectedOption.query);
+  const selectedOption = useSelector((store) => store.app.selectedMenuOption);
+  const dispatch = useDispatch();
+
+  useMainVideos(selectedOption.title, selectedOption.query);
+
   function handleSidebarOptionsClick(title, query) {
-    setSelectedOption({ title, query });
+    dispatch(setMenuOption({ title, query }));
   }
 
   if (!isMenuOpen) return null;

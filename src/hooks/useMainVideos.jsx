@@ -1,21 +1,25 @@
 import { useEffect } from "react";
 import getMainVideos from "../api/getMainVideos";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMainVideos } from "../utils/videosSlice";
 
-export const useMainVideos = (query) => {
+export const useMainVideos = (title, query) => {
+  const videoData = useSelector((store) => store.videos.mainVideos);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (videoData[title]) return;
+
     const fetchMainVideos = async () => {
       try {
         const result = await getMainVideos(query);
-        dispatch(setMainVideos(result));
+        dispatch(setMainVideos({ [title]: result }));
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchMainVideos();
-  }, [dispatch, query]);
+  }, [dispatch, title, query]);
 };

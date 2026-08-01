@@ -4,9 +4,13 @@ import VideoCard from "../Layout/VideoCard";
 
 const VideoContainer = () => {
   const videoData = useSelector((store) => store.videos.mainVideos);
+
+  const selectedMenuOption = useSelector(
+    (store) => store.app.selectedMenuOption,
+  );
   const isNavBarOpen = useSelector((store) => store.app.isMenuOpen);
 
-  if (!videoData) return null;
+  if (!videoData[selectedMenuOption.title]) return null;
 
   return (
     <div
@@ -23,7 +27,7 @@ const VideoContainer = () => {
             gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
           }}
         >
-          {videoData.map((video) => (
+          {videoData[selectedMenuOption.title].map((video) => (
             <VideoCard key={video.id} props={video} />
           ))}
         </div>

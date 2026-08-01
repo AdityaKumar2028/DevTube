@@ -32,8 +32,6 @@ const getMainVideos = async (query) => {
     searchData: searchVideoMap.get(video.id),
   }));
 
-  console.log(mergedVideos);
-
   return mergedVideos;
 };
 
