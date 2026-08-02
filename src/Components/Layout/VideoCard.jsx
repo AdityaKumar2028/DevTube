@@ -7,7 +7,6 @@ const VideoCard = ({ props }) => {
   const { viewCount } = statistics;
   const { duration } = contentDetails;
 
-  // Format views (1.2K, 3.4M...)
   const formatViews = (views) => {
     return new Intl.NumberFormat("en", {
       notation: "compact",
@@ -15,7 +14,6 @@ const VideoCard = ({ props }) => {
     }).format(Number(views));
   };
 
-  // Format "2 days ago"
   const formatPublishedDate = (date) => {
     const seconds = Math.floor((Date.now() - new Date(date)) / 1000);
 
@@ -39,7 +37,6 @@ const VideoCard = ({ props }) => {
     return "Just now";
   };
 
-  // Convert ISO8601 duration -> 12:34 or 1:23:45
   const formatDuration = (iso) => {
     const match = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
 
