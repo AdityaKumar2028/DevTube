@@ -3,17 +3,23 @@ import store from "./utils/store";
 import Header from "./Components/Layout/Header";
 import Body from "./Components/Main/Body";
 import "./index.css";
-import { Route } from "lucide-react";
-import { WatchPlayer } from "./Components/Watch Player/WatchPlayer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import WatchPlayer from "./Components/Watch/WatchPlayer";
+import Sidebar from "./Components/Layout/Sidebar";
 
 function App() {
   return (
-    <Provider store={store}>
-      <Header />
+    <BrowserRouter>
+      <Provider store={store}>
+        <Header />
+        <Sidebar />
 
-      <Route path="/" element={<Body />} />
-      <Route path="/watch" element={<WatchPlayer />} />
-    </Provider>
+        <Routes>
+          <Route path="/" element={<Body />} />
+          <Route path="/watch" element={<WatchPlayer />} />
+        </Routes>
+      </Provider>
+    </BrowserRouter>
   );
 }
 

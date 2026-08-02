@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import logo from "../../assets/logo.png";
 import { Search, Moon, Menu, Bell, CircleUserRound, Mic } from "lucide-react";
 import { toggleMenu } from "../../utils/appSlice";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -16,11 +17,13 @@ const Header = () => {
             <Menu size={22} />
           </button>
 
-          <img
-            src={logo}
-            alt="MyTube"
-            className="h-12 w-25 cursor-pointer rounded-lg"
-          />
+          <Link to="/">
+            <img
+              src={logo}
+              alt="MyTube"
+              className="h-12 w-25 cursor-pointer rounded-lg"
+            />
+          </Link>
         </div>
 
         <div className="flex items-center flex-1 max-w-2xl mx-10">

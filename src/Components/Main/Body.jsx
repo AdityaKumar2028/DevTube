@@ -1,9 +1,7 @@
-import Sidebar from "../Layout/Sidebar";
 import VideoContainer from "./videoContainer";
 const Body = () => {
   return (
-    <div className="body-container flex flex-row">
-      <Sidebar />
+    <div className="body-container">
       <VideoContainer />
     </div>
   );
