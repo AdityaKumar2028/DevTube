@@ -6,7 +6,6 @@ import {
   formatPublishedDate,
 } from "../../utils/Constants";
 
-// VideoCard.jsx
 const VideoCard = ({ props }) => {
   const { snippet } = props.searchData;
   const { statistics, contentDetails } = props;

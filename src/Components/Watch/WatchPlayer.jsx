@@ -5,6 +5,7 @@ import {
   formatPublishedDate,
   formatViews,
 } from "../../utils/Constants";
+import getVideoComments from "../../api/getVideoComments";
 
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
@@ -14,6 +15,8 @@ const WatchPlayer = () => {
   const videoData = useSelector((store) => store.videos.playerVideo);
 
   if (!videoData) return null;
+
+  getVideoComments(videoId);
 
   const { title, publishTime } = videoData.searchData.snippet;
   const { duration } = videoData.contentDetails;

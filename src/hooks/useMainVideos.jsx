@@ -21,5 +21,5 @@ export const useMainVideos = (title, query) => {
     };
 
     fetchMainVideos();
-  }, [dispatch, title, query]);
+  }, [dispatch, title, query, videoData]);
 };
