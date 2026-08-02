@@ -1,43 +1,56 @@
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import {
+  formatDuration,
+  formatPublishedDate,
+  formatViews,
+} from "../../utils/Constants";
 
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
 
   const videoId = searchParams.get("v");
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
-
   const videoData = useSelector((store) => store.videos.playerVideo);
 
   if (!videoData) return null;
 
-  console.log(videoData);
-
-  const { publishTime, title } = videoData.searchData.snippet;
-
+  const { title, publishTime } = videoData.searchData.snippet;
+  const { duration } = videoData.contentDetails;
   const { viewCount, likeCount, commentCount } = videoData.statistics;
 
-  console.log(title, publishTime, viewCount, likeCount, commentCount);
-
   return (
-    <div className={`p-6 ${isMenuOpen ? "ml-44" : "ml-0"}`}>
-      <div className="aspect-video w-3/4 overflow-hidden rounded-xl shadow-lg">
-        <iframe
-          className="h-full w-full"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0`}
-          title="YouTube Video Player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        ></iframe>
-      </div>
+    <div className={`p-6 ${isMenuOpen ? "ml-44" : ""}`}>
+      <div className="max-w-4xl">
+        <div className="aspect-video overflow-hidden rounded-xl shadow">
+          <iframe
+            className="w-full h-full"
+            src={`https://www.youtube.com/embed/${videoId}?rel=0`}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
 
-      <div className="content-stats">
-        <p>{title}</p>
-        <p>{viewCount}</p>
-        <p>{publishTime}</p>
-        <p>{likeCount}</p>
-        <p>{commentCount}</p>
+        <h1 className="mt-4 text-xl font-semibold">{title}</h1>
+
+        {/* Stats */}
+        <div className="mt-2 flex flex-wrap gap-2 text-sm text-gray-600">
+          <span>{formatViews(viewCount)} views</span>
+          <span>•</span>
+          <span>{formatPublishedDate(publishTime)}</span>
+          <span>•</span>
+          <span>{formatViews(likeCount)} likes</span>
+          <span>•</span>
+          <span>{formatViews(commentCount)} comments</span>
+          <span>•</span>
+          <span>{formatDuration(duration)}</span>
+        </div>
+
+        <hr className="my-5" />
+
+        {/* Comments */}
+        <h2 className="text-lg font-semibold">Comments</h2>
       </div>
     </div>
   );
