@@ -21,7 +21,7 @@ const WatchPlayer = () => {
 
   return (
     <div className={`p-6 ${isMenuOpen ? "ml-44" : ""}`}>
-      <div className="max-w-4xl">
+      <div className="max-w-3xl">
         <div className="aspect-video overflow-hidden rounded-xl shadow">
           <iframe
             className="w-full h-full"
@@ -35,7 +35,7 @@ const WatchPlayer = () => {
         <h1 className="mt-4 text-xl font-semibold">{title}</h1>
 
         {/* Stats */}
-        <div className="mt-2 flex flex-wrap gap-2 text-sm text-gray-600">
+        <div className="mt-2 flex flex-wrap gap-2 text-sm text-gray-800 font-semibold">
           <span>{formatViews(viewCount)} views</span>
           <span>•</span>
           <span>{formatPublishedDate(publishTime)}</span>
@@ -44,12 +44,11 @@ const WatchPlayer = () => {
           <span>•</span>
           <span>{formatViews(commentCount)} comments</span>
           <span>•</span>
-          <span>{formatDuration(duration)}</span>
+          <span>Duration: {formatDuration(duration)}</span>
         </div>
 
         <hr className="my-5" />
 
-        {/* Comments */}
         <h2 className="text-lg font-semibold">Comments</h2>
       </div>
     </div>
