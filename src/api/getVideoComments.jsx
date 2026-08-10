@@ -1,14 +1,11 @@
-import { BASE_URL } from "../utils/Constants";
-const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+import { dummyComments } from "../utils/Constants";
 
-const getVideoComments = async (videoId) => {
-  const response = await fetch(
-    `${BASE_URL}/commentThreads?part=snippet&videoId=${videoId}&maxResults=20&key=${API_KEY}`,
-  );
-
-  const json = await response.json();
-
-  return json;
+const getVideoComments = async () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(dummyComments);
+    }, 1000);
+  });
 };
 
 export default getVideoComments;

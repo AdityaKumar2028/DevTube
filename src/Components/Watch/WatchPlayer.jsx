@@ -5,7 +5,8 @@ import {
   formatPublishedDate,
   formatViews,
 } from "../../utils/Constants";
-import getVideoComments from "../../api/getVideoComments";
+import { useVideoComments } from "../../hooks/useVideoComments";
+import VideoComment from "./VideoComment";
 
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
@@ -13,10 +14,12 @@ const WatchPlayer = () => {
   const videoId = searchParams.get("v");
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const videoData = useSelector((store) => store.videos.playerVideo);
+  useVideoComments(videoId);
+  const videoComments = useSelector((store) => store.videos.videoComments);
 
-  if (!videoData) return null;
+  if (!videoData || !videoComments || !videoId) return null;
 
-  getVideoComments(videoId);
+  console.log(videoComments);
 
   const { title, publishTime } = videoData.searchData.snippet;
   const { duration } = videoData.contentDetails;
@@ -50,9 +53,15 @@ const WatchPlayer = () => {
           <span>Duration: {formatDuration(duration)}</span>
         </div>
 
-        <hr className="my-5" />
+        <hr className="my-2" />
 
         <h2 className="text-lg font-semibold">Comments</h2>
+
+        <div className="comments flex flex-col">
+          {videoComments.map((data) => (
+            <VideoComment key={data.id} commentData={data} />
+          ))}
+        </div>
       </div>
     </div>
   );

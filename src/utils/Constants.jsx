@@ -109,3 +109,142 @@ export const formatDuration = (iso) => {
 
   return `${minutes}:${String(seconds).padStart(2, "0")}`;
 };
+
+export const dummyComments = [
+  {
+    id: "1",
+    user: "Aditya",
+    avatar: "https://i.pravatar.cc/40?img=1",
+    text: "React recursion finally clicked for me.",
+    replies: [
+      {
+        id: "2",
+        user: "Rahul",
+        avatar: "https://i.pravatar.cc/40?img=2",
+        text: "Recursive components are so elegant.",
+        replies: [
+          {
+            id: "3",
+            user: "Priya",
+            avatar: "https://i.pravatar.cc/40?img=3",
+            text: "Wait till you build a file explorer.",
+            replies: [
+              {
+                id: "4",
+                user: "Aman",
+                avatar: "https://i.pravatar.cc/40?img=4",
+                text: "Or VS Code sidebar clone.",
+                replies: [
+                  {
+                    id: "5",
+                    user: "Karan",
+                    avatar: "https://i.pravatar.cc/40?img=5",
+                    text: "Or Reddit comments 😂",
+                    replies: [
+                      {
+                        id: "6",
+                        user: "Riya",
+                        avatar: "https://i.pravatar.cc/40?img=6",
+                        text: "Which is exactly what he's building.",
+                        replies: [
+                          {
+                            id: "7",
+                            user: "Dev",
+                            avatar: "https://i.pravatar.cc/40?img=7",
+                            text: "Recursion inside recursion.",
+                            replies: [
+                              {
+                                id: "8",
+                                user: "Siddharth",
+                                avatar: "https://i.pravatar.cc/40?img=8",
+                                text: "We need to go deeper.",
+                                replies: [
+                                  {
+                                    id: "9",
+                                    user: "Neha",
+                                    avatar: "https://i.pravatar.cc/40?img=9",
+                                    text: "Inception comments.",
+                                    replies: [
+                                      {
+                                        id: "10",
+                                        user: "Aryan",
+                                        avatar:
+                                          "https://i.pravatar.cc/40?img=10",
+                                        text: "Maximum nesting achieved.",
+                                        replies: [],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "11",
+    user: "Ankit",
+    avatar: "https://i.pravatar.cc/40?img=11",
+    text: "DevTube is becoming a serious project now.",
+    replies: [
+      {
+        id: "12",
+        user: "Harsh",
+        avatar: "https://i.pravatar.cc/40?img=12",
+        text: "Live chat next?",
+        replies: [
+          {
+            id: "13",
+            user: "Rohit",
+            avatar: "https://i.pravatar.cc/40?img=13",
+            text: "And websocket backend.",
+            replies: [
+              {
+                id: "14",
+                user: "Yash",
+                avatar: "https://i.pravatar.cc/40?img=14",
+                text: "And Redis.",
+                replies: [
+                  {
+                    id: "15",
+                    user: "Nitin",
+                    avatar: "https://i.pravatar.cc/40?img=15",
+                    text: "And then system design round cleared.",
+                    replies: [],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "16",
+    user: "Striver",
+    avatar: "https://i.pravatar.cc/40?img=16",
+    text: "Did you revise your DSA today?",
+    replies: [
+      {
+        id: "17",
+        user: "Aditya",
+        avatar: "https://i.pravatar.cc/40?img=1",
+        text: "Please don't attack me here too.",
+        replies: [],
+      },
+    ],
+  },
+];
