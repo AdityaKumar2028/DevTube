@@ -17,7 +17,6 @@ const VideoCard = ({ props }) => {
   const dispatch = useDispatch();
 
   function handleVideoClick(clickedVideoData) {
-    console.log(clickedVideoData);
     dispatch(setPlayerVideo(clickedVideoData));
   }
 

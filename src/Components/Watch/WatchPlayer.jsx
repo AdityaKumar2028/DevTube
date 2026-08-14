@@ -16,16 +16,19 @@ const WatchPlayer = () => {
   const videoId = searchParams.get("v");
   const title = searchParams.get("title");
   const query = searchParams.get("query");
-  console.log(videoId, title, query);
 
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
-  const videoData = useSelector((store) => store.videos.playerVideo);
+  let videoData = useSelector((store) => store.videos.playerVideo);
   const videoComments = useSelector((store) => store.videos.videoComments);
   const mainVideos = useSelector((store) => store.videos.mainVideos);
 
   useVideoComments(videoId);
   useMainVideos(title, query);
-  console.log(videoData, videoComments, videoId);
+
+  if (!videoData) {
+    videoData = mainVideos?.[title]?.find((data) => data.id === videoId);
+  }
+
   if (!videoData || !videoComments || !videoId) return null;
 
   const recommendedVideoData = mainVideos[title];
@@ -82,9 +85,11 @@ const WatchPlayer = () => {
           <div className="border border-gray-200 rounded-xl p-4 bg-white">
             <h3 className="font-bold mb-4">Up next</h3>
             <div className="flex flex-col gap-4">
-              {recommendedVideoData.map((data) => (
-                <VideoCard key={data.id} props={data} />
-              ))}
+              {recommendedVideoData
+                .filter((data) => data.id !== videoId)
+                .map((data) => (
+                  <VideoCard key={data.id} props={data} />
+                ))}
             </div>
           </div>
         </div>
