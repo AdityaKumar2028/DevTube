@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import VideoCard from "../Layout/VideoCard";
 import {
   formatDuration,
@@ -32,8 +32,7 @@ const WatchPlayer = () => {
   if (!videoData || !videoComments || !videoId) return null;
 
   const recommendedVideoData = mainVideos[title];
-  console.log(recommendedVideoData);
-  const { videoTitle, publishTime } = videoData.searchData.snippet;
+  const { title: videoTitle, publishTime } = videoData.searchData.snippet;
   const { duration } = videoData.contentDetails;
   const { viewCount, likeCount, commentCount } = videoData.statistics;
 
@@ -88,7 +87,11 @@ const WatchPlayer = () => {
               {recommendedVideoData
                 .filter((data) => data.id !== videoId)
                 .map((data) => (
-                  <VideoCard key={data.id} props={data} />
+                  <Link
+                    to={`/watch?v=${data.id}&title=${encodeURIComponent(title)}&query=${encodeURIComponent(query)}`}
+                  >
+                    <VideoCard key={data.id} props={data} />
+                  </Link>
                 ))}
             </div>
           </div>
