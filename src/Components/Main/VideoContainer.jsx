@@ -24,7 +24,12 @@ const VideoContainer = () => {
           } gap-y-5 gap-x-3`}
         >
           {videoData[selectedMenuOption.title].map((video) => (
-            <Link to={`/watch?v=${video.id}`} key={video.id}>
+            <Link
+              to={`/watch?v=${video.id}&title=${encodeURIComponent(
+                selectedMenuOption.title,
+              )}&query=${encodeURIComponent(selectedMenuOption.query)}`}
+              key={video.id}
+            >
               <VideoCard key={video.id} props={video} />
             </Link>
           ))}

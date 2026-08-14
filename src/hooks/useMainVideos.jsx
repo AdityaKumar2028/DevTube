@@ -5,6 +5,7 @@ import { setMainVideos } from "../utils/videosSlice";
 
 export const useMainVideos = (title, query) => {
   const videoData = useSelector((store) => store.videos.mainVideos);
+  console.log("Hello", title, query);
 
   const dispatch = useDispatch();
 

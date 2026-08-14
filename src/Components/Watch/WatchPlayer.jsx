@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import VideoCard from "../Layout/VideoCard";
 import {
   formatDuration,
   formatPublishedDate,
@@ -7,60 +8,85 @@ import {
 } from "../../utils/Constants";
 import { useVideoComments } from "../../hooks/useVideoComments";
 import VideoComment from "./VideoComment";
+import { useMainVideos } from "../../hooks/useMainVideos";
 
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
 
   const videoId = searchParams.get("v");
+  const title = searchParams.get("title");
+  const query = searchParams.get("query");
+  console.log(videoId, title, query);
+
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const videoData = useSelector((store) => store.videos.playerVideo);
-  useVideoComments(videoId);
   const videoComments = useSelector((store) => store.videos.videoComments);
+  const mainVideos = useSelector((store) => store.videos.mainVideos);
 
+  useVideoComments(videoId);
+  useMainVideos(title, query);
+  console.log(videoData, videoComments, videoId);
   if (!videoData || !videoComments || !videoId) return null;
 
-  console.log(videoComments);
-
-  const { title, publishTime } = videoData.searchData.snippet;
+  const recommendedVideoData = mainVideos[title];
+  console.log(recommendedVideoData);
+  const { videoTitle, publishTime } = videoData.searchData.snippet;
   const { duration } = videoData.contentDetails;
   const { viewCount, likeCount, commentCount } = videoData.statistics;
 
   return (
-    <div className={`p-6 ${isMenuOpen ? "ml-44" : ""}`}>
-      <div className="max-w-3xl">
-        <div className="aspect-video overflow-hidden rounded-xl shadow">
-          <iframe
-            className="w-full h-full"
-            src={`https://www.youtube.com/embed/${videoId}?rel=0`}
-            title={title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
+    <div className={`p-4 md:p-6 ${isMenuOpen ? "lg:ml-44" : ""}`}>
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
+        <div className="flex-1 w-full">
+          <div className="w-3xl aspect-video bg-black rounded-xl overflow-hidden">
+            <iframe
+              className="w-full h-full"
+              src={`https://www.youtube.com/embed/${videoId}?rel=0`}
+              title={videoTitle}
+              allowFullScreen
+            />
+          </div>
+
+          <h1 className="text-xl font-bold mt-4">{videoTitle}</h1>
+          <div className="flex flex-wrap gap-4 text-sm text-gray-600 mt-2">
+            <span>{formatViews(viewCount)} views</span>
+            <span>{formatPublishedDate(publishTime)}</span>
+            <span>👍 {formatViews(likeCount)}</span>
+            <span>{formatViews(commentCount)} comments</span>
+            <span>⏱ {formatDuration(duration)}</span>
+          </div>
+
+          <hr className="my-6 border-gray-300" />
+
+          <h2 className="text-lg font-bold mb-4">
+            Comments ({videoComments.length})
+          </h2>
+          <div className="flex flex-col gap-4">
+            {videoComments.map((data) => (
+              <VideoComment key={data.id} commentData={data} />
+            ))}
+          </div>
         </div>
 
-        <h1 className="mt-4 text-xl font-semibold">{title}</h1>
+        <div className="w-full lg:w-100 flex flex-col gap-6 lg:sticky lg:top-4 lg:max-h-[95vh] overflow-y-auto pr-2 pb-4 custom-scrollbar">
+          <div className="shrink-0 border border-gray-200 rounded-xl bg-gray-50 h-75 flex flex-col">
+            <div className="p-3 bg-white border-b border-gray-200 rounded-t-xl font-bold flex justify-between">
+              <span>Live Chat</span>
+              <span className="text-red-500 text-sm">Live</span>
+            </div>
+            <div className="flex-1 flex items-center justify-center text-gray-500 text-sm">
+              Live chat is unavailable.
+            </div>
+          </div>
 
-        {/* Stats */}
-        <div className="mt-2 flex flex-wrap gap-2 text-sm text-gray-800 font-semibold">
-          <span>{formatViews(viewCount)} views</span>
-          <span>•</span>
-          <span>{formatPublishedDate(publishTime)}</span>
-          <span>•</span>
-          <span>{formatViews(likeCount)} likes</span>
-          <span>•</span>
-          <span>{formatViews(commentCount)} comments</span>
-          <span>•</span>
-          <span>Duration: {formatDuration(duration)}</span>
-        </div>
-
-        <hr className="my-2" />
-
-        <h2 className="text-lg font-semibold">Comments</h2>
-
-        <div className="comments flex flex-col">
-          {videoComments.map((data) => (
-            <VideoComment key={data.id} commentData={data} />
-          ))}
+          <div className="border border-gray-200 rounded-xl p-4 bg-white">
+            <h3 className="font-bold mb-4">Up next</h3>
+            <div className="flex flex-col gap-4">
+              {recommendedVideoData.map((data) => (
+                <VideoCard key={data.id} props={data} />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

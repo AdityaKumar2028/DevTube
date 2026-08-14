@@ -1,5 +1,7 @@
+import { useState } from "react";
 const VideoComment = ({ commentData }) => {
   const { avatar, text, user, replies } = commentData;
+  const [showReplies, setShowReplies] = useState(false);
 
   return (
     <div className="mt-3">
@@ -15,8 +17,10 @@ const VideoComment = ({ commentData }) => {
           <p className="text-gray-800">{text}</p>
         </div>
       </div>
-
-      {replies?.length > 0 && (
+      <button onClick={() => setShowReplies((prev) => !prev)}>
+        Replies...
+      </button>
+      {showReplies && replies?.length > 0 && (
         <div className="ml-6 mt-2 border-l-2 border-gray-300 pl-4">
           {replies.map((reply) => (
             <VideoComment key={reply.id} commentData={reply} />

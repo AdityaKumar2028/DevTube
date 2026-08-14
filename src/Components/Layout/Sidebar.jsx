@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { sidebarOptions } from "../../utils/Constants";
-import { useMainVideos } from "../../hooks/useMainVideos";
 import { setMenuOption } from "../../utils/appSlice";
 import { useNavigate } from "react-router-dom";
 const Sidebar = () => {
@@ -8,8 +7,6 @@ const Sidebar = () => {
   const selectedOption = useSelector((store) => store.app.selectedMenuOption);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useMainVideos(selectedOption.title, selectedOption.query);
 
   function handleSidebarOptionsClick(title, query) {
     dispatch(setMenuOption({ title, query }));
