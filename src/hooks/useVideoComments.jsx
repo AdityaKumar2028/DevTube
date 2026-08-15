@@ -15,7 +15,6 @@ export const useVideoComments = (videoId) => {
         console.error(error);
       }
     };
-
     fetchComments();
   }, [dispatch, videoId]);
 };

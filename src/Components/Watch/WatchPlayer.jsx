@@ -9,6 +9,7 @@ import {
 import { useVideoComments } from "../../hooks/useVideoComments";
 import VideoComment from "./VideoComment";
 import { useMainVideos } from "../../hooks/useMainVideos";
+import LiveChat from "./LiveChat";
 
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
@@ -77,7 +78,7 @@ const WatchPlayer = () => {
               <span className="text-red-500 text-sm">Live</span>
             </div>
             <div className="flex-1 flex items-center justify-center text-gray-500 text-sm">
-              Live chat is unavailable.
+              <LiveChat />
             </div>
           </div>
 

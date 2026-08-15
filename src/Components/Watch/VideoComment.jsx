@@ -17,9 +17,11 @@ const VideoComment = ({ commentData }) => {
           <p className="text-gray-800">{text}</p>
         </div>
       </div>
-      <button onClick={() => setShowReplies((prev) => !prev)}>
-        Replies...
-      </button>
+      {replies.length > 0 && (
+        <button onClick={() => setShowReplies((prev) => !prev)}>
+          {showReplies ? "Hide Replies" : "Show Replies"}
+        </button>
+      )}
       {showReplies && replies?.length > 0 && (
         <div className="ml-6 mt-2 border-l-2 border-gray-300 pl-4">
           {replies.map((reply) => (
