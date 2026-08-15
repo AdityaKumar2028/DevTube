@@ -1,28 +1,27 @@
 import { useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
-import VideoCard from "../Layout/VideoCard";
 import he from "he";
+import VideoCard from "../Layout/VideoCard";
+import VideoComment from "./VideoComment";
+import LiveChat from "./LiveChat";
 import {
   formatDuration,
   formatPublishedDate,
   formatViews,
 } from "../../utils/Constants";
 import { useVideoComments } from "../../hooks/useVideoComments";
-import VideoComment from "./VideoComment";
 import { useMainVideos } from "../../hooks/useMainVideos";
-import LiveChat from "./LiveChat";
 
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
-
   const videoId = searchParams.get("v");
-  const title = searchParams.get("title");
-  const query = searchParams.get("query");
+  const title = searchParams.get("title") || "";
+  const query = searchParams.get("query") || "";
 
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
-  let videoData = useSelector((store) => store.videos.playerVideo);
   const videoComments = useSelector((store) => store.videos.videoComments);
   const mainVideos = useSelector((store) => store.videos.mainVideos);
+  let videoData = useSelector((store) => store.videos.playerVideo);
 
   useVideoComments(videoId);
   useMainVideos(title, query);
@@ -33,66 +32,81 @@ const WatchPlayer = () => {
 
   if (!videoData || !videoComments || !videoId) return null;
 
-  const recommendedVideoData = mainVideos[title];
   const { title: videoTitle, publishTime } = videoData.searchData.snippet;
   const { duration } = videoData.contentDetails;
   const { viewCount, likeCount, commentCount } = videoData.statistics;
+  const recommendedVideos =
+    mainVideos?.[title]?.filter((data) => data.id !== videoId) || [];
 
   return (
-    <div className={`p-4 md:p-6 ${isMenuOpen ? "lg:ml-44" : ""}`}>
-      <div className="flex flex-col lg:flex-row gap-6 items-start">
-        <div className="flex-1 w-full">
-          <div className="w-3xl aspect-video bg-black rounded-xl overflow-hidden">
+    <main className={`p-4 md:p-6 ${isMenuOpen ? "xl:ml-44" : ""}`}>
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-6 xl:flex-row">
+        <section className="min-w-0 flex-1">
+          <div className="mx-auto w-full overflow-hidden rounded-2xl bg-black shadow-[0_12px_32px_rgba(15,23,42,0.18)] aspect-video xl:w-[min(100%,calc(62svh*16/9))] xl:max-w-[56rem]">
             <iframe
-              className="w-full h-full"
-              src={`https://www.youtube.com/embed/${videoId}?rel=0`}
+              className="h-full w-full"
+              src={`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`}
               title={videoTitle}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
           </div>
 
-          <h1 className="text-xl font-bold mt-4">{he.decode(videoTitle)}</h1>
-          <div className="flex flex-wrap gap-4 text-sm text-gray-600 mt-2">
-            <span>{formatViews(viewCount)} views</span>
-            <span>{formatPublishedDate(publishTime)}</span>
-            <span>👍 {formatViews(likeCount)}</span>
-            <span>{formatViews(commentCount)} comments</span>
-            <span>⏱ {formatDuration(duration)}</span>
+          <h1 className="mt-4 max-w-4xl text-xl font-bold tracking-tight text-slate-900 md:text-2xl line-clamp-2">
+            {he.decode(videoTitle || "")}
+          </h1>
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-sm font-medium text-slate-700">
+            <span className="rounded-full bg-slate-100 px-3 py-1.5">
+              {formatViews(viewCount)} views
+            </span>
+            <span className="rounded-full bg-slate-100 px-3 py-1.5">
+              {formatPublishedDate(publishTime)}
+            </span>
+            <span className="rounded-full bg-slate-100 px-3 py-1.5">
+              👍 {formatViews(likeCount)}
+            </span>
+            <span className="rounded-full bg-slate-100 px-3 py-1.5">
+              {formatViews(commentCount)} comments
+            </span>
+            <span className="rounded-full bg-slate-100 px-3 py-1.5">
+              ⏱ {formatDuration(duration)}
+            </span>
           </div>
 
-          <hr className="my-6 border-gray-300" />
+          <hr className="my-5 border-slate-200" />
 
-          <h2 className="text-lg font-bold mb-4">
+          <h2 className="mb-5 text-xl font-bold text-slate-900">
             Comments ({videoComments.length})
           </h2>
-          <div className="flex flex-col gap-4">
-            {videoComments.map((data) => (
-              <VideoComment key={data.id} commentData={data} />
+          <div className="flex flex-col gap-6">
+            {videoComments.map((data, index) => (
+              <VideoComment key={data?.id || index} commentData={data} />
             ))}
           </div>
-        </div>
+        </section>
 
-        <div className="w-full lg:w-100 flex flex-col gap-6 lg:sticky lg:top-4 lg:max-h-[95vh] overflow-y-auto pr-2 pb-4 custom-scrollbar">
+        <aside className="flex w-full shrink-0 flex-col gap-5 xl:sticky xl:top-20 xl:w-100">
           <LiveChat />
 
-          <div className="border border-gray-200 rounded-xl p-4 bg-white">
-            <h3 className="font-bold mb-4">Up next</h3>
-            <div className="flex flex-col gap-4">
-              {recommendedVideoData
-                .filter((data) => data.id !== videoId)
-                .map((data) => (
-                  <Link
-                    to={`/watch?v=${data.id}&title=${encodeURIComponent(title)}&query=${encodeURIComponent(query)}`}
-                    key={data.id}
-                  >
-                    <VideoCard key={data.id} props={data} />
-                  </Link>
-                ))}
+          <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div className="border-b border-purple-100 bg-purple-50 px-4 py-3">
+              <h2 className="text-base font-bold text-slate-900">Up next</h2>
             </div>
-          </div>
-        </div>
+            <div className="h-[calc(100svh-8rem)] space-y-3 overflow-y-auto p-3 pr-2 [scrollbar-color:#a78bfa_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-300 [&::-webkit-scrollbar-thumb]:hover:bg-purple-400 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-1.5">
+              {recommendedVideos.map((data) => (
+                <Link
+                  className="block max-w-full overflow-hidden rounded-lg [&>div]:w-full"
+                  key={data.id}
+                  to={`/watch?v=${data.id}&title=${encodeURIComponent(title)}&query=${encodeURIComponent(query)}`}
+                >
+                  <VideoCard props={data} />
+                </Link>
+              ))}
+            </div>
+          </section>
+        </aside>
       </div>
-    </div>
+    </main>
   );
 };
 

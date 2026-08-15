@@ -20,8 +20,8 @@ const Header = () => {
           <Link to="/">
             <img
               src={logo}
-              alt="MyTube"
-              className="h-12 w-25 cursor-pointer rounded-lg"
+              alt="DevTube"
+              className="h-15 rounded-2xl bg-green-200 w-20 shadow cursor-pointer object-contain"
             />
           </Link>
         </div>

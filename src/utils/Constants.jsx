@@ -10,6 +10,8 @@ import {
   BriefcaseBusiness,
 } from "lucide-react";
 
+export const liveCommentsOffset = 570;
+
 export const sidebarOptions = [
   {
     title: "Home",
@@ -249,108 +251,44 @@ export const dummyComments = [
   },
 ];
 
-export const NAMES = [
-  "Aditya",
-  "Rahul",
-  "Priya",
-  "Rohit",
-  "Akshay",
-  "Aman",
-  "Sakshi",
-  "Neha",
-  "Vikas",
-  "Ankit",
-  "Karan",
-  "Harsh",
-  "Shivam",
-  "Ayush",
-  "Nitin",
-  "Pooja",
-  "Riya",
-  "Arjun",
-  "Yash",
-  "Manish",
-  "Abhishek",
-  "Deepak",
-  "Sarthak",
-  "Tushar",
-  "Dev",
-  "Raghav",
-  "Ananya",
-  "Sneha",
-  "Mehul",
-  "Vivek",
-  "Aditi",
-  "Krishna",
-  "Naman",
-  "Ritik",
-  "Mohit",
-  "Sumit",
-  "Varun",
-  "Prateek",
-  "Tarun",
-  "Aryan",
+export const LIVE_CHAT_NAMES = [
+  "Aarav Mehta",
+  "Maya Chen",
+  "Arjun Kapoor",
+  "Sophia Williams",
+  "Rohan Shah",
+  "Priya Nair",
+  "Daniel Kim",
+  "Ananya Iyer",
+  "Ishaan Verma",
+  "Olivia Martin",
+  "Kabir Singh",
+  "Nisha Patel",
 ];
 
-export const COMMENTS = [
-  "Amazing stream 🔥",
-  "First time watching live",
-  "React is awesome",
-  "Can you explain Redux?",
-  "Hello from Delhi",
-  "Watching from Noida",
-  "Namaste React OP",
-  "Great explanation",
-  "This cleared my doubt",
-  "Can you zoom in?",
-  "Audio is clear now",
-  "Backend next please",
-  "NodeJS supremacy 🚀",
-  "Who's here in 2026?",
-  "Let's gooooo",
-  "W stream",
-  "Common Akshay Saini W",
-  "Bro explained it perfectly",
-  "Need more projects like this",
-  "Can you share source code?",
-  "I love React",
-  "Tailwind is so good",
-  "Redux Toolkit saved my life",
-  "This is gold",
-  "Taking notes right now",
-  "Can someone explain useEffect?",
-  "Greetings from Mumbai",
-  "Learning a lot today",
-  "Subbed instantly",
-  "This deserves more views",
-  "Can you make a DevOps series?",
-  "Spring Boot vs Node?",
-  "NextJS when?",
-  "Vite is super fast",
-  "Amazing content",
-  "Very underrated channel",
-  "Bro cooking today 🔥",
-  "System design next",
-  "Socket.io tutorial please",
-  "Live chat working nice",
-  "Shoutout from MAIT",
-  "Rao Sahab on Top 😎",
-  "Interview prep please",
-  "Need DSA roadmap",
-  "Can you explain closures?",
-  "Java or Node?",
-  "Who's preparing for placements?",
-  "Keep going bro",
-  "Thanks for the stream",
-  "Best coding channel",
+export const LIVE_CHAT_MESSAGES = [
+  "The explanation of the component lifecycle was very clear.",
+  "I appreciate seeing the project structure before the implementation.",
+  "The responsive layout approach is a useful takeaway.",
+  "Could you share how you would test this feature next?",
+  "This is a thoughtful use of Redux Toolkit for UI state.",
+  "The accessibility details make this feel production-ready.",
+  "I am taking notes on the Tailwind utility composition.",
+  "Great example of keeping components focused and reusable.",
+  "The API integration pattern is explained really well.",
+  "This gives me a clearer approach for my portfolio project.",
+  "The debugging workflow is practical and easy to follow.",
+  "Would love a follow-up on performance optimization.",
 ];
 
 export const getRandomName = () => {
-  return NAMES[Math.floor(Math.random() * NAMES.length)];
+  return LIVE_CHAT_NAMES[Math.floor(Math.random() * LIVE_CHAT_NAMES.length)];
 };
 
 export const getRandomComment = () => {
-  return COMMENTS[Math.floor(Math.random() * COMMENTS.length)];
+  return LIVE_CHAT_MESSAGES[
+    Math.floor(Math.random() * LIVE_CHAT_MESSAGES.length)
+  ];
 };
 
 export const getRandomAvatar = () => {

@@ -9,7 +9,11 @@ const liveCommentsSlice = createSlice({
     addLiveComments: (state, action) => {
       state.comments.push(action.payload);
     },
+    removeLiveComments: (state) => {
+      state.comments.length = 0;
+    },
   },
 });
-export const { addLiveComments } = liveCommentsSlice.actions;
+export const { addLiveComments, removeLiveComments } =
+  liveCommentsSlice.actions;
 export default liveCommentsSlice.reducer;
