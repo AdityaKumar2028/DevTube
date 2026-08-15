@@ -1,4 +1,4 @@
-import VideoContainer from "./videoContainer";
+import VideoContainer from "./VideoContainer";
 import { useSelector } from "react-redux";
 import { useMainVideos } from "../../hooks/useMainVideos";
 
