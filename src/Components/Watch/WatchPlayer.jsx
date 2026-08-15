@@ -73,15 +73,7 @@ const WatchPlayer = () => {
         </div>
 
         <div className="w-full lg:w-100 flex flex-col gap-6 lg:sticky lg:top-4 lg:max-h-[95vh] overflow-y-auto pr-2 pb-4 custom-scrollbar">
-          <div className="shrink-0 border border-gray-200 rounded-xl bg-gray-50 h-75 flex flex-col">
-            <div className="p-3 bg-white border-b border-gray-200 rounded-t-xl font-bold flex justify-between">
-              <span>Live Chat</span>
-              <span className="text-red-500 text-sm">Live</span>
-            </div>
-            <div className="flex-1 flex items-center text-gray-500 text-sm">
-              <LiveChat />
-            </div>
-          </div>
+          <LiveChat />
 
           <div className="border border-gray-200 rounded-xl p-4 bg-white">
             <h3 className="font-bold mb-4">Up next</h3>
