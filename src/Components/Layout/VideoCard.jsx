@@ -23,7 +23,7 @@ const VideoCard = ({ props }) => {
 
   return (
     <div
-      className="w-75 cursor-pointer bg-gray-100 group hover:bg-fuchsia-100 p-3 rounded-lg"
+      className="group w-full cursor-pointer rounded-xl bg-gray-100 p-3 transition-colors hover:bg-fuchsia-100"
       onClick={() => handleVideoClick(props)}
     >
       <div className="relative overflow-hidden rounded-lg border border-[#E5E7EB] group-hover:border-[#6D28D9] group-hover:shadow-md transition-all duration-200">

@@ -14,20 +14,17 @@ const VideoContainer = () => {
   return (
     <div
       className={`min-h-screen bg-white transition-all duration-300 ${
-        isNavBarOpen ? "ml-48" : "ml-0"
+        isNavBarOpen ? "ml-16 md:ml-48" : "ml-0"
       }`}
     >
-      <div className="py-5 px-6">
-        <div
-          className={`grid ${
-            isNavBarOpen ? "grid-cols-4" : "grid-cols-5"
-          } gap-y-5 gap-x-3`}
-        >
+      <div className="px-3 py-4 sm:px-5 md:px-6 md:py-5">
+        <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 sm:gap-5 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {videoData[selectedMenuOption.title].map((video) => (
             <Link
               to={`/watch?v=${video.id}&title=${encodeURIComponent(
                 selectedMenuOption.title,
               )}&query=${encodeURIComponent(selectedMenuOption.query)}`}
+              className="min-w-0"
               key={video.id}
             >
               <VideoCard key={video.id} props={video} />

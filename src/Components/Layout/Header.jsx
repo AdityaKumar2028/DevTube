@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
   return (
-    <header className="sticky top-0 z-50 h-16 bg-white border-b-gray-800s shadow-sm select-none">
-      <div className="h-full flex items-center justify-between px-6">
-        <div className="flex items-center gap-4">
+    <header className="sticky top-0 z-50 h-16 select-none border-b border-slate-200 bg-white shadow-sm">
+      <div className="flex h-full items-center justify-between gap-2 px-3 sm:px-6">
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <button
-            className="p-2 rounded-full hover:bg-gray-100 cursor-pointer"
+            className="cursor-pointer rounded-full p-2 hover:bg-gray-100"
             onClick={() => dispatch(toggleMenu())}
           >
             <Menu size={22} />
@@ -21,12 +21,12 @@ const Header = () => {
             <img
               src={logo}
               alt="DevTube"
-              className="h-13 rounded-2xl bg-green-200 w-20 shadow cursor-pointer object-contain"
+              className="h-10 w-12 cursor-pointer rounded-xl bg-green-100 p-1 object-contain shadow-sm sm:h-11 sm:w-16"
             />
           </Link>
         </div>
 
-        <div className="flex items-center flex-1 max-w-2xl mx-10">
+        <div className="hidden min-w-0 flex-1 items-center md:mx-4 md:flex lg:mx-10 lg:max-w-2xl">
           <div className="flex flex-1">
             <input
               type="text"
@@ -44,17 +44,20 @@ const Header = () => {
           </button>
         </div>
 
-        <div className="flex items-center gap-3">
-          <button className="p-2 rounded-full hover:bg-gray-100 cursor-pointer">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
+          <button className="cursor-pointer rounded-full p-2 hover:bg-gray-100 md:hidden">
+            <Search size={20} />
+          </button>
+          <button className="hidden cursor-pointer rounded-full p-2 hover:bg-gray-100 sm:block">
             <Moon size={21} />
           </button>
 
-          <button className="p-2 rounded-full hover:bg-gray-100 cursor-pointer">
+          <button className="hidden cursor-pointer rounded-full p-2 hover:bg-gray-100 sm:block">
             <Bell size={21} />
           </button>
 
-          <button className="p-2 rounded-full hover:bg-gray-100 cursor-pointer">
-            <CircleUserRound size={30} />
+          <button className="cursor-pointer rounded-full p-1.5 hover:bg-gray-100 sm:p-2">
+            <CircleUserRound className="h-7 w-7 sm:h-[30px] sm:w-[30px]" />
           </button>
         </div>
       </div>

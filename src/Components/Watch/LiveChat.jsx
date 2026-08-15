@@ -57,7 +57,7 @@ const LiveChat = () => {
   };
 
   return (
-    <section className="flex h-96 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <section className="flex h-80 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm sm:h-96 sm:rounded-2xl">
       <div className="flex shrink-0 items-center justify-between border-b border-purple-100 bg-purple-50 px-4 py-3">
         <h2 className="text-base font-bold text-slate-900">Live chat</h2>
       </div>
@@ -75,17 +75,17 @@ const LiveChat = () => {
 
       <form
         onSubmit={handleSend}
-        className="flex shrink-0 gap-2 border-t border-slate-200 bg-white px-3 py-3"
+        className="flex shrink-0 gap-2 border-t border-slate-200 bg-white px-3 py-2 sm:py-3"
       >
         <input
           value={chatMsg}
           onChange={(e) => setChatMsg(e.target.value)}
           placeholder="Chat publicly..."
-          className="min-w-0 flex-1 rounded-full bg-slate-100 px-4 py-2.5 text-sm text-slate-900 outline-none transition-shadow placeholder:text-slate-500 focus:ring-2 focus:ring-purple-400"
+          className="min-w-0 flex-1 rounded-full bg-slate-100 px-3 py-2 text-sm text-slate-900 outline-none transition-shadow placeholder:text-slate-500 focus:ring-2 focus:ring-purple-400 sm:px-4 sm:py-2.5"
         />
         <button
           type="submit"
-          className="rounded-full bg-purple-400 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2"
+          className="rounded-full bg-purple-400 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 sm:px-4 sm:py-2.5"
         >
           Send
         </button>
