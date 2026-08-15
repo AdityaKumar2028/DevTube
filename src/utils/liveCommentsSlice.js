@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { liveChatSize } from "./Constants";
 
 const liveCommentsSlice = createSlice({
   name: "liveComments",
@@ -7,6 +8,7 @@ const liveCommentsSlice = createSlice({
   },
   reducers: {
     addLiveComments: (state, action) => {
+      state.comments.splice(0, state.comments.length - liveChatSize + 1);
       state.comments.push(action.payload);
     },
     removeLiveComments: (state) => {

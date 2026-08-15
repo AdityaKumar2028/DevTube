@@ -21,7 +21,7 @@ const Header = () => {
             <img
               src={logo}
               alt="DevTube"
-              className="h-15 rounded-2xl bg-green-200 w-20 shadow cursor-pointer object-contain"
+              className="h-13 rounded-2xl bg-green-200 w-20 shadow cursor-pointer object-contain"
             />
           </Link>
         </div>
