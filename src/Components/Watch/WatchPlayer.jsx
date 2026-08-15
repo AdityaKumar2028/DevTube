@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link, useSearchParams } from "react-router-dom";
 import VideoCard from "../Layout/VideoCard";
+import he from "he";
 import {
   formatDuration,
   formatPublishedDate,
@@ -50,7 +51,7 @@ const WatchPlayer = () => {
             />
           </div>
 
-          <h1 className="text-xl font-bold mt-4">{videoTitle}</h1>
+          <h1 className="text-xl font-bold mt-4">{he.decode(videoTitle)}</h1>
           <div className="flex flex-wrap gap-4 text-sm text-gray-600 mt-2">
             <span>{formatViews(viewCount)} views</span>
             <span>{formatPublishedDate(publishTime)}</span>
@@ -90,6 +91,7 @@ const WatchPlayer = () => {
                 .map((data) => (
                   <Link
                     to={`/watch?v=${data.id}&title=${encodeURIComponent(title)}&query=${encodeURIComponent(query)}`}
+                    key={data.id}
                   >
                     <VideoCard key={data.id} props={data} />
                   </Link>

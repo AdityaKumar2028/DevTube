@@ -5,6 +5,7 @@ import {
   formatViews,
   formatPublishedDate,
 } from "../../utils/Constants";
+import he from "he";
 
 const VideoCard = ({ props }) => {
   const { snippet } = props.searchData;
@@ -39,7 +40,7 @@ const VideoCard = ({ props }) => {
 
       <div className="mt-3">
         <h3 className="font-bold text-[15px] leading-snug text-[#1C1D1F] line-clamp-2 group-hover:text-green-600 transition-colors">
-          {title}
+          {he.decode(title)}
         </h3>
 
         <p className="text-[13px] text-[#57606A] font-medium mt-1.5">
