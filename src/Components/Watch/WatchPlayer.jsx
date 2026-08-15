@@ -78,7 +78,7 @@ const WatchPlayer = () => {
               <span>Live Chat</span>
               <span className="text-red-500 text-sm">Live</span>
             </div>
-            <div className="flex-1 flex items-center justify-center text-gray-500 text-sm">
+            <div className="flex-1 flex items-center text-gray-500 text-sm">
               <LiveChat />
             </div>
           </div>

@@ -17,8 +17,11 @@ const VideoComment = ({ commentData }) => {
           <p className="text-gray-800">{text}</p>
         </div>
       </div>
-      {replies.length > 0 && (
-        <button onClick={() => setShowReplies((prev) => !prev)}>
+      {replies?.length > 0 && (
+        <button
+          className="mt-2 text-sm font-medium text-blue-600"
+          onClick={() => setShowReplies((prev) => !prev)}
+        >
           {showReplies ? "Hide Replies" : "Show Replies"}
         </button>
       )}
