@@ -10,7 +10,7 @@ import {
   BriefcaseBusiness,
 } from "lucide-react";
 
-export const liveCommentsOffset = 570;
+export const liveCommentsOffset = 1000;
 
 export const sidebarOptions = [
   {
