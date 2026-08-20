@@ -1,4 +1,4 @@
-const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY1;
+const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 const getSearchSuggestions = async (query) => {
   if (!query.trim()) return [];

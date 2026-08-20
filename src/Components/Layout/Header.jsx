@@ -10,14 +10,23 @@ import SearchSuggestionCard from "../Search/SuggestionCard";
 const Header = () => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   useSearchSuggestions(query);
   const searchSuggestions = useSelector(
     (store) => store.search.searchSuggestions,
   );
-  console.log(searchSuggestions[query]);
+
+  const handleBlur = () => {
+    setTimeout(() => {
+      setShowSuggestions(false);
+    }, 200);
+  };
+
+  const currentSuggestions = searchSuggestions[query] || [];
+
   return (
-    <header className="flex flex-col">
+    <header className="flex flex-col relative">
       <div className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/90 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/90">
         <div className="flex h-16 items-center justify-between gap-3 px-3 sm:h-17.5 sm:px-6">
           <div className="flex shrink-0 items-center gap-2 sm:gap-4">
@@ -39,12 +48,15 @@ const Header = () => {
           </div>
 
           <div className="hidden max-w-180 flex-1 items-center justify-center px-8 md:flex">
-            <div className="flex w-full items-center">
+            <div className="flex w-full items-center relative">
               <div className="flex w-full overflow-hidden rounded-l-full border border-gray-300 bg-white transition-all focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600 dark:border-gray-700 dark:bg-gray-900 dark:focus-within:border-purple-500 dark:focus-within:ring-purple-500">
                 <input
                   type="text"
+                  value={query}
                   placeholder="Search programming videos..."
                   onChange={(e) => setQuery(e.target.value)}
+                  onFocus={() => setShowSuggestions(true)}
+                  onBlur={handleBlur}
                   className="h-11 w-full bg-transparent px-5 py-2 text-[15px] text-gray-900 placeholder-gray-500 outline-none dark:text-gray-100 dark:placeholder-gray-500"
                 />
               </div>
@@ -79,7 +91,11 @@ const Header = () => {
           <div className="flex flex-1 items-center overflow-hidden rounded-full border border-gray-300 bg-white focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600 dark:border-gray-700 dark:bg-gray-900 dark:focus-within:border-purple-500 dark:focus-within:ring-purple-500">
             <input
               type="text"
+              value={query}
               placeholder="Search..."
+              onChange={(e) => setQuery(e.target.value)}
+              onFocus={() => setShowSuggestions(true)}
+              onBlur={handleBlur}
               className="h-10 w-full bg-transparent px-4 text-[15px] text-gray-900 placeholder-gray-500 outline-none dark:text-gray-100 dark:placeholder-gray-500"
             />
             <button
@@ -97,7 +113,12 @@ const Header = () => {
           </button>
         </div>
       </div>
-      <SearchSuggestionCard searchSuggestions={searchSuggestions[query]} />
+
+      {showSuggestions &&
+        query.trim() !== "" &&
+        currentSuggestions.length > 0 && (
+          <SearchSuggestionCard searchSuggestions={currentSuggestions} />
+        )}
     </header>
   );
 };
