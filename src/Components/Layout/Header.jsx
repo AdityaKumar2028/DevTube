@@ -1,65 +1,89 @@
 import { useDispatch } from "react-redux";
 import logo from "../../assets/logo.png";
-import { Search, Moon, Menu, Bell, CircleUserRound, Mic } from "lucide-react";
+import { Search, Moon, Menu, CircleUserRound, Mic } from "lucide-react";
 import { toggleMenu } from "../../utils/appSlice";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
+
   return (
-    <header className="sticky top-0 z-50 h-16 select-none border-b border-slate-200 bg-white shadow-sm">
-      <div className="flex h-full items-center justify-between gap-2 px-3 sm:px-6">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/90 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/90">
+      <div className="flex h-16 items-center justify-between gap-3 px-3 sm:h-17.5 sm:px-6">
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <button
-            className="cursor-pointer rounded-full p-2 hover:bg-gray-100"
+            className="rounded-full p-2.5 text-gray-600 transition-colors hover:bg-gray-100 active:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
             onClick={() => dispatch(toggleMenu())}
+            aria-label="Toggle Menu"
           >
-            <Menu size={22} />
+            <Menu size={24} className="sm:size-7" />
           </button>
 
-          <Link to="/">
+          <Link to="/" className="flex items-center gap-1">
             <img
               src={logo}
               alt="DevTube"
-              className="h-10 w-12 cursor-pointer rounded-xl bg-green-100 p-1 object-contain shadow-sm sm:h-11 sm:w-16"
+              className="h-8 cursor-pointer object-contain sm:h-10"
             />
           </Link>
         </div>
 
-        <div className="hidden min-w-0 flex-1 items-center md:mx-4 md:flex lg:mx-10 lg:max-w-2xl">
-          <div className="flex flex-1">
-            <input
-              type="text"
-              placeholder="Search programming videos..."
-              className="flex-1 h-11 border border-gray-300 rounded-l-full px-5 outline-none focus:border-purple-500"
-            />
-
-            <button className="w-16 h-11 cursor-pointer border border-l-0 border-gray-300 rounded-r-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">
-              <Search size={20} />
+        <div className="hidden max-w-180 flex-1 items-center justify-center px-8 md:flex">
+          <div className="flex w-full items-center">
+            <div className="flex w-full overflow-hidden rounded-l-full border border-gray-300 bg-white transition-all focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600 dark:border-gray-700 dark:bg-gray-900 dark:focus-within:border-purple-500 dark:focus-within:ring-purple-500">
+              <input
+                type="text"
+                placeholder="Search programming videos..."
+                className="h-11 w-full bg-transparent px-5 py-2 text-[15px] text-gray-900 placeholder-gray-500 outline-none dark:text-gray-100 dark:placeholder-gray-500"
+              />
+            </div>
+            <button
+              className="flex h-11 w-16 shrink-0 items-center justify-center rounded-r-full border border-l-0 border-gray-300 bg-gray-50 text-gray-600 transition-colors hover:bg-purple-50 hover:text-purple-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+              aria-label="Search"
+            >
+              <Search size={20} strokeWidth={2.5} />
             </button>
           </div>
 
-          <button className="ml-3 h-11 cursor-pointer w-11 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">
+          <button
+            className="ml-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition-colors hover:bg-purple-100 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+            aria-label="Search with voice"
+          >
             <Mic size={20} />
           </button>
         </div>
 
-        <div className="flex shrink-0 items-center gap-1 sm:gap-2">
-          <button className="cursor-pointer rounded-full p-2 hover:bg-gray-100 md:hidden">
-            <Search size={20} />
-          </button>
-          <button className="hidden cursor-pointer rounded-full p-2 hover:bg-gray-100 sm:block">
-            <Moon size={21} />
+        <div className="flex shrink-0 items-center gap-1 sm:gap-3">
+          <button className="rounded-full p-2.5 text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800">
+            <Moon size={24} className="sm:size-6" />
           </button>
 
-          <button className="hidden cursor-pointer rounded-full p-2 hover:bg-gray-100 sm:block">
-            <Bell size={21} />
-          </button>
-
-          <button className="cursor-pointer rounded-full p-1.5 hover:bg-gray-100 sm:p-2">
-            <CircleUserRound className="h-7 w-7 sm:h-[30px] sm:w-[30px]" />
+          <button className="ml-1 rounded-full p-1 text-purple-600 transition-colors hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-gray-800">
+            <CircleUserRound size={32} className="stroke-[1.5] sm:size-9" />
           </button>
         </div>
+      </div>
+
+      <div className="flex items-center gap-2 border-t border-gray-100 px-3 pb-2.5 pt-1.5 md:hidden dark:border-gray-900">
+        <div className="flex flex-1 items-center overflow-hidden rounded-full border border-gray-300 bg-white focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600 dark:border-gray-700 dark:bg-gray-900 dark:focus-within:border-purple-500 dark:focus-within:ring-purple-500">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="h-10 w-full bg-transparent px-4 text-[15px] text-gray-900 placeholder-gray-500 outline-none dark:text-gray-100 dark:placeholder-gray-500"
+          />
+          <button
+            className="flex h-10 w-11 shrink-0 items-center justify-center text-gray-600 dark:text-gray-300"
+            aria-label="Search"
+          >
+            <Search size={20} />
+          </button>
+        </div>
+        <button
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+          aria-label="Search with voice"
+        >
+          <Mic size={18} />
+        </button>
       </div>
     </header>
   );
