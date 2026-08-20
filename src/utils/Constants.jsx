@@ -12,6 +12,7 @@ import {
 
 export const liveCommentsOffset = 777;
 export const liveChatSize = 50;
+export const debounce_timer = 300;
 
 export const sidebarOptions = [
   {

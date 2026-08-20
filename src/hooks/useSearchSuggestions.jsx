@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import getSearchSuggestions from "../api/getSearchSuggestions";
 import { useDispatch, useSelector } from "react-redux";
 import { cacheSearchResult } from "../utils/searchSlice";
+import { debounce_timer } from "../utils/Constants";
 
 export const useSearchSuggestions = (query) => {
   const searchSuggestions = useSelector(
@@ -22,6 +23,8 @@ export const useSearchSuggestions = (query) => {
       }
     };
 
-    fetchSearchSuggestions();
+    const timer = setTimeout(() => fetchSearchSuggestions(), debounce_timer);
+
+    return () => clearTimeout(timer);
   }, [dispatch, query, searchSuggestions]);
 };

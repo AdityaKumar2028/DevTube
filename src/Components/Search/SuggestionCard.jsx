@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-
+import he from "he";
 const SearchSuggestionCard = ({ searchSuggestions }) => {
   return (
     searchSuggestions && (
@@ -14,9 +14,11 @@ const SearchSuggestionCard = ({ searchSuggestions }) => {
                 />
                 <img
                   alt="search thumbnail"
-                  src="data.snippet.thumbnail.small"
+                  src={data.snippet.thumbnails.default.url}
                 />
-                <span className="truncate">{data.snippet.title}</span>
+                <span className="truncate">
+                  {he.decode(data.snippet.title || "")}
+                </span>
               </button>
             </li>
           ))}

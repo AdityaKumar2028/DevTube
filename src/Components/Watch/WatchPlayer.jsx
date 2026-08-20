@@ -45,7 +45,7 @@ const WatchPlayer = () => {
     <main className={`p-3 sm:p-4 md:p-6 ${isMenuOpen ? "ml-16 xl:ml-44" : ""}`}>
       <div className="mx-auto flex max-w-[1600px] flex-col gap-5 sm:gap-6 xl:flex-row">
         <section className="min-w-0 flex-1">
-          <div className="mx-auto aspect-video w-full overflow-hidden rounded-xl bg-black shadow-[0_12px_32px_rgba(15,23,42,0.18)] sm:rounded-2xl xl:w-[min(100%,calc(62svh*16/9))] xl:max-w-[56rem]">
+          <div className="mx-auto aspect-video w-full overflow-hidden rounded-xl bg-black shadow-[0_12px_32px_rgba(15,23,42,0.18)] sm:rounded-2xl xl:w-[min(100%,calc(62svh*16/9))] xl:max-w-4xl">
             <iframe
               className="h-full w-full"
               src={`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`}
