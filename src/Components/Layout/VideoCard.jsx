@@ -1,5 +1,3 @@
-import { useDispatch } from "react-redux";
-import { setPlayerVideo } from "../../utils/videosSlice";
 import {
   formatDuration,
   formatViews,
@@ -15,17 +13,8 @@ const VideoCard = ({ props }) => {
   const { viewCount } = statistics;
   const { duration } = contentDetails;
 
-  const dispatch = useDispatch();
-
-  function handleVideoClick(clickedVideoData) {
-    dispatch(setPlayerVideo(clickedVideoData));
-  }
-
   return (
-    <div
-      className="group w-full cursor-pointer rounded-xl bg-gray-100 p-3 transition-colors hover:bg-fuchsia-100"
-      onClick={() => handleVideoClick(props)}
-    >
+    <div className="group w-full cursor-pointer rounded-xl bg-gray-100 p-3 transition-colors hover:bg-fuchsia-100">
       <div className="relative overflow-hidden rounded-lg border border-[#E5E7EB] group-hover:border-[#6D28D9] group-hover:shadow-md transition-all duration-200">
         <img
           src={thumbnails.high.url}

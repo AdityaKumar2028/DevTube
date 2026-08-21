@@ -9,7 +9,7 @@ const LiveComments = ({ commentData }) => (
       <span className="mr-2 font-semibold text-slate-800">
         {commentData.user}
       </span>
-      <span className="break-words text-slate-700">{commentData.text}</span>
+      <span className="wrap-break-word text-slate-700">{commentData.text}</span>
     </div>
   </article>
 );

@@ -22,16 +22,13 @@ const WatchPlayer = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const videoComments = useSelector((store) => store.videos.videoComments);
   const mainVideos = useSelector((store) => store.videos.mainVideos);
-  let videoData = useSelector((store) => store.videos.playerVideo);
 
   useVideoComments(videoId);
   useMainVideos(title, query);
 
   const dispatch = useDispatch();
 
-  if (!videoData) {
-    videoData = mainVideos?.[title]?.find((data) => data.id === videoId);
-  }
+  const videoData = mainVideos?.[title]?.find((data) => data.id === videoId);
 
   if (!videoData || !videoComments || !videoId) return null;
 

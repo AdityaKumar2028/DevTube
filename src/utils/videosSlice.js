@@ -4,15 +4,11 @@ const videosSlice = createSlice({
   name: "videos",
   initialState: {
     mainVideos: {},
-    playerVideo: null,
     videoComments: null,
   },
   reducers: {
     setMainVideos: (state, action) => {
       Object.assign(state.mainVideos, action.payload);
-    },
-    setPlayerVideo: (state, action) => {
-      state.playerVideo = action.payload;
     },
 
     setVideoComments: (state, action) => {
@@ -21,7 +17,6 @@ const videosSlice = createSlice({
   },
 });
 
-export const { setMainVideos, setPlayerVideo, setVideoComments } =
-  videosSlice.actions;
+export const { setMainVideos, setVideoComments } = videosSlice.actions;
 
 export default videosSlice.reducer;

@@ -64,7 +64,7 @@ This avoids one extra detail request per card. It is API batching, not connectio
 
 ### Watch page
 
-Selecting a video stores its data in `playerVideo` and navigates to `/watch`. The watch page uses the selected data immediately, with a lookup fallback from the cached category list after a refresh. Recommended videos are the cached category results excluding the current video.
+Selecting a video stores its data in `videoSlice` and navigates to `/watch`. The watch page uses the selected data immediately, with a lookup fallback from the cached category list after a refresh. Recommended videos are the cached category results excluding the current video.
 
 ### Live chat
 
