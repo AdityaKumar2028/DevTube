@@ -6,16 +6,16 @@ const SearchSuggestionCard = ({ searchSuggestions }) => {
   if (!searchSuggestions || searchSuggestions.length === 0) return null;
 
   return (
-    <div className="absolute left-1/2 top-16 z-50 hidden w-full max-w-180 -translate-x-1/2 px-8 md:block sm:top-[4.5rem]">
-      <ul className="overflow-hidden rounded-xl border border-gray-200 bg-white py-3 shadow-xl dark:border-gray-800 dark:bg-gray-900">
+    <div className="w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xl dark:border-gray-800 dark:bg-gray-900">
+      <ul className="max-h-[60vh] overflow-y-auto py-2 sm:py-3">
         {searchSuggestions.map((data) => (
           <Link
             to={`/watch?v=${data.id.videoId}&title=${data.id.videoId}&query=${encodeURIComponent(data.snippet?.title)}`}
-            className="min-w-0"
+            className="block min-w-0"
             key={data.id.videoId}
           >
             <li>
-              <button className="flex w-full items-center gap-4 px-5 py-2.5 text-left transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 outline-none">
+              <button className="flex w-full items-center gap-3 px-4 py-2 text-left transition-colors outline-none hover:bg-gray-100 focus:bg-gray-100 sm:gap-4 sm:px-5 sm:py-2.5 dark:hover:bg-gray-800 dark:focus:bg-gray-800">
                 <Search
                   size={18}
                   className="shrink-0 text-gray-400 dark:text-gray-500"
@@ -25,11 +25,11 @@ const SearchSuggestionCard = ({ searchSuggestions }) => {
                   <img
                     alt="thumbnail"
                     src={data.snippet.thumbnails.default.url}
-                    className="h-9 w-16 shrink-0 rounded object-cover shadow-sm"
+                    className="h-8 w-14 shrink-0 rounded object-cover shadow-sm sm:h-9 sm:w-16"
                   />
                 )}
 
-                <span className="line-clamp-1 flex-1 text-[15px] font-medium text-gray-800 dark:text-gray-200">
+                <span className="line-clamp-1 flex-1 text-sm font-medium text-gray-800 sm:text-[15px] dark:text-gray-200">
                   {he.decode(data.snippet?.title || "")}
                 </span>
               </button>

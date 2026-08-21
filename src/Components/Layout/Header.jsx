@@ -24,6 +24,8 @@ const Header = () => {
   };
 
   const currentSuggestions = searchSuggestions[query] || [];
+  const shouldShowSuggestions =
+    showSuggestions && query.trim() !== "" && currentSuggestions.length > 0;
 
   return (
     <>
@@ -67,6 +69,14 @@ const Header = () => {
                 >
                   <Search size={20} strokeWidth={2.5} />
                 </button>
+
+                {shouldShowSuggestions && (
+                  <div className="absolute left-0 right-0 top-full z-50 mt-2">
+                    <SearchSuggestionCard
+                      searchSuggestions={currentSuggestions}
+                    />
+                  </div>
+                )}
               </div>
 
               <button
@@ -88,7 +98,7 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 border-t border-gray-100 px-3 pb-2.5 pt-1.5 md:hidden dark:border-gray-900">
+          <div className="relative flex items-center gap-2 border-t border-gray-100 px-3 pb-2.5 pt-1.5 md:hidden dark:border-gray-900">
             <div className="flex flex-1 items-center overflow-hidden rounded-full border border-gray-300 bg-white focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600 dark:border-gray-700 dark:bg-gray-900 dark:focus-within:border-purple-500 dark:focus-within:ring-purple-500">
               <input
                 type="text"
@@ -112,14 +122,14 @@ const Header = () => {
             >
               <Mic size={18} />
             </button>
+
+            {shouldShowSuggestions && (
+              <div className="absolute inset-x-3 top-full z-50 mt-2">
+                <SearchSuggestionCard searchSuggestions={currentSuggestions} />
+              </div>
+            )}
           </div>
         </div>
-
-        {showSuggestions &&
-          query.trim() !== "" &&
-          currentSuggestions.length > 0 && (
-            <SearchSuggestionCard searchSuggestions={currentSuggestions} />
-          )}
       </header>
 
       <div className="h-31 md:h-17.5 w-full shrink-0" aria-hidden="true"></div>
