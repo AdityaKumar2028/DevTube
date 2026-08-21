@@ -1,12 +1,12 @@
-const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
-
+const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY1;
+import { BASE_URL } from "../utils/Constants";
 const getSearchSuggestions = async (query) => {
   if (!query.trim()) return [];
 
   try {
-    const devQuery = `${query} programming tutorial coding`;
+    const devQuery = `${query} programming coding devloper`;
 
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoCategoryId=28&maxResults=5&q=${encodeURIComponent(
+    const url = `${BASE_URL}/search?part=snippet&type=video&videoDuration=long&maxResults=5&q=${encodeURIComponent(
       devQuery,
     )}&key=${API_KEY}`;
 
