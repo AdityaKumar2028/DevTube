@@ -6,7 +6,6 @@ import VideoCard from "../Layout/VideoCard";
 const SearchVideoContainer = () => {
   const [params] = useSearchParams();
   const query = params.get("q");
-  console.log(query);
 
   useSearchResults(query);
 
@@ -14,14 +13,10 @@ const SearchVideoContainer = () => {
 
   if (!searchResult) return null;
 
-  console.log(searchResult);
-  const video = searchResult[0];
-  console.log(video.id, video.searchData?.snippet?.title);
-
   return (
     <div
       className={`min-h-screen bg-white transition-all duration-30
-       `}
+        `}
     >
       <div className="w-full">
         <div className="grid grid-cols-2 justify-center items-center gap-4 m-10">

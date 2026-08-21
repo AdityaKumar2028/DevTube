@@ -10,7 +10,6 @@ export const useSearchResults = (query) => {
     const fetchSearchResults = async () => {
       const searchResults = await getMainVideos(query);
 
-      console.log(searchResults);
       dispatch(addSearchResults(searchResults));
     };
 
