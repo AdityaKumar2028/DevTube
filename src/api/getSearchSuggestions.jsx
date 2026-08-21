@@ -16,7 +16,6 @@ const getSearchSuggestions = async (query) => {
     }
 
     const data = await response.json();
-    console.log(data.items);
     return data.items;
   } catch (error) {
     console.error("Error fetching developer videos:", error);
