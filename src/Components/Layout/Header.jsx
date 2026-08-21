@@ -2,13 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import logo from "../../assets/logo.png";
 import { Search, Moon, Menu, CircleUserRound, Mic } from "lucide-react";
 import { toggleMenu } from "../../utils/appSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useSearchSuggestions } from "../../hooks/useSearchSuggestions";
 import SearchSuggestionCard from "../Search/SuggestionCard";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
 
@@ -51,7 +52,13 @@ const Header = () => {
             </div>
 
             <div className="hidden max-w-180 flex-1 items-center justify-center px-8 md:flex">
-              <div className="relative flex w-full items-center">
+              <form
+                className="relative flex w-full items-center"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  navigate(`/search?q=${encodeURIComponent(query)}`);
+                }}
+              >
                 <div className="flex w-full overflow-hidden rounded-l-full border border-gray-300 bg-white transition-all focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600 dark:border-gray-700 dark:bg-gray-900 dark:focus-within:border-purple-500 dark:focus-within:ring-purple-500">
                   <input
                     type="text"
@@ -77,7 +84,7 @@ const Header = () => {
                     />
                   </div>
                 )}
-              </div>
+              </form>
 
               <button
                 className="ml-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition-colors hover:bg-purple-100 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"

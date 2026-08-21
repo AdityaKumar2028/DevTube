@@ -3,9 +3,10 @@ import { BASE_URL } from "../utils/Constants";
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
 const getMainVideos = async (query) => {
+  const devQuery = `${query} programming coding devloper`;
   const searchResponse = await fetch(
     `${BASE_URL}/search?part=snippet&type=video&videoDuration=long&maxResults=20&q=${encodeURIComponent(
-      query,
+      devQuery,
     )}&key=${API_KEY}`,
   );
 

@@ -6,6 +6,7 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WatchPlayer from "./Components/Watch/WatchPlayer";
 import Sidebar from "./Components/Layout/Sidebar";
+import SearchVideoContainer from "./Components/Search/SearchVideoContainer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Body />} />
           <Route path="/watch" element={<WatchPlayer />} />
+          <Route path="/search" element={<SearchVideoContainer />} />
         </Routes>
       </Provider>
     </BrowserRouter>
