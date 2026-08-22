@@ -56,6 +56,7 @@ const Header = () => {
                 className="relative flex w-full items-center"
                 onSubmit={(e) => {
                   e.preventDefault();
+                  setShowSuggestions(false);
                   navigate(`/search?q=${encodeURIComponent(query)}`);
                 }}
               >
