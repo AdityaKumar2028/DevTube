@@ -10,18 +10,23 @@ const SearchVideoContainer = () => {
   useSearchResults(query);
 
   const searchResult = useSelector((store) => store.search.searchResults);
+  const isNavBarOpen = useSelector((store) => store.app.isMenuOpen);
 
   if (!searchResult) return null;
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div
+      className={`min-h-screen bg-white transition-all duration-300 ${
+        isNavBarOpen ? "ml-16 md:ml-48" : "ml-0"
+      }`}
+    >
       <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <p className="mb-5 text-sm font-medium text-gray-500">
           {searchResult.length} results for{" "}
           <span className="text-gray-900">"{query}"</span>
         </p>
 
-        <div className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
           {searchResult.map((video) => (
             <Link
               to={`/watch?v=${video.id}&title=${video.id}&query=${encodeURIComponent(
