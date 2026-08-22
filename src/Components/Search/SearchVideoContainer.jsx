@@ -26,7 +26,7 @@ const SearchVideoContainer = () => {
           <span className="text-gray-900">"{query}"</span>
         </p>
 
-        <div className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
+        <div className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           {searchResult.map((video) => (
             <Link
               to={`/watch?v=${video.id}&title=${video.id}&query=${encodeURIComponent(

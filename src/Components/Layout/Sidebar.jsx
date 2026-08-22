@@ -15,7 +15,7 @@ const Sidebar = () => {
   if (!isMenuOpen) return null;
 
   return (
-    <aside className="fixed left-0 top-16 z-40 h-[calc(100svh-4rem)] w-16 overflow-y-auto border-r border-gray-200 bg-white py-3 shadow-md md:w-min md:py-4 md:shadow-none">
+    <aside className="fixed left-0 top-31 md:top-17.5 z-40 h-[calc(100svh-7.75rem)] md:h-[calc(100svh-4.375rem)] w-16 overflow-y-auto border-r border-gray-200 bg-white py-3 shadow-md md:w-min md:py-4 md:shadow-none">
       <ul className="px-2 md:px-3">
         {sidebarOptions.map((item) => (
           <li
