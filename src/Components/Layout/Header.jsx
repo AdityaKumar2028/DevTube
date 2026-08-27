@@ -24,7 +24,7 @@ const SearchBox = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowSuggestions(false);
-    navigate(`/search?q=${encodeURIComponent(query)}`);
+    if (query.length) navigate(`/search?q=${encodeURIComponent(query)}`);
   };
 
   const shouldShow = showSuggestions && query.trim() && suggestions.length > 0;
@@ -117,8 +117,6 @@ const Header = () => {
                 />
               </Link>
             </div>
-
-            {/* Desktop Search */}
             <div className="hidden flex-1 items-center justify-center px-8 md:flex">
               <SearchBox
                 query={query}
@@ -138,7 +136,6 @@ const Header = () => {
               </button>
             </div>
 
-            {/* Right */}
             <div className="flex shrink-0 items-center gap-1 sm:gap-3">
               <button
                 className="rounded-full p-2.5 text-gray-600 hover:bg-gray-100
@@ -156,7 +153,6 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Mobile Search */}
           <div className="flex items-center gap-2 border-t border-gray-100 px-3 pb-2.5 pt-1.5 md:hidden">
             <SearchBox
               mobile
