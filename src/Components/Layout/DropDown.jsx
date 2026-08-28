@@ -1,10 +1,4 @@
-import {
-  FaGithub,
-  FaLinkedin,
-  FaEnvelope,
-  FaCode,
-  FaGlobe,
-} from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaCode } from "react-icons/fa";
 
 const DropDown = ({ setShowProfileMenu }) => {
   const profileLinks = [
@@ -50,7 +44,7 @@ const DropDown = ({ setShowProfileMenu }) => {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-purple-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-purple-400"
+              className="flex cursor-pointer items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-purple-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-purple-400"
               onClick={() => setShowProfileMenu(false)} // This now correctly uses the prop
             >
               <Icon className="h-[18px] w-[18px]" />

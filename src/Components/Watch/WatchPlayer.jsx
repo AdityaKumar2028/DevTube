@@ -6,8 +6,8 @@ import LiveChat from "./LiveChat";
 
 import { useVideoComments } from "../../hooks/useVideoComments";
 import { useWatchVideo } from "../../hooks/useWatchVideo";
-import UpNextVideos from "./upNextVideos";
-import WatchVideoStats from "./watchVideoStats";
+import UpNextVideos from "./UpNextVideos";
+import WatchVideoStats from "./WatchVideoStats";
 import { WatchPlayerShimmer } from "../Shimmer";
 
 const WatchPlayer = () => {

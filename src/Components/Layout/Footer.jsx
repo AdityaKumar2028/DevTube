@@ -22,7 +22,7 @@ const Footer = () => {
       <div className="mx-auto w-full max-w-[1600px] px-4 py-8 sm:px-6 lg:py-10">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-start">
           <div className="max-w-sm">
-            <Link to="/" className="mb-4 flex items-center gap-2">
+            <Link to="/" className="mb-4 flex cursor-pointer items-center gap-2">
               <img
                 src={logo}
                 alt="DevTube"
@@ -68,7 +68,7 @@ const Footer = () => {
               href="https://github.com/AdityaKumar2028"
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center gap-1.5 transition-colors hover:text-purple-600 dark:hover:text-purple-400"
+              className="group flex cursor-pointer items-center gap-1.5 transition-colors hover:text-purple-600 dark:hover:text-purple-400"
             >
               <GitFork
                 size={16}

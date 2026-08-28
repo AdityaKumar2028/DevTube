@@ -25,7 +25,7 @@ const UpNextVideos = ({ query, videoId }) => {
           .filter((video) => video.id != videoId)
           .map((data) => (
             <Link
-              className="block max-w-full overflow-hidden rounded-lg [&>div]:w-full"
+              className="block max-w-full cursor-pointer overflow-hidden rounded-lg [&>div]:w-full"
               key={data.id}
               onClick={() => dispatch(removeLiveComments())}
               to={`/watch?v=${data.id}&query=${encodeURIComponent(query)}`}

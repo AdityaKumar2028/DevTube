@@ -10,14 +10,14 @@ import { useTheme } from "../../hooks/useTheme";
 import DropDown from "./DropDown"; // Importing your new DropDown component
 
 const iconBtn =
-  "rounded-full p-2.5 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800";
+  "cursor-pointer rounded-full p-2.5 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800";
 
 const MicButton = ({ isListening, onClick, size = 20, className = "" }) => (
   <button
     onClick={onClick}
     title={isListening ? "Listening..." : "Search with voice"}
     aria-label="Search with voice"
-    className={`flex shrink-0 items-center justify-center rounded-full transition-all duration-200 ${
+    className={`flex shrink-0 cursor-pointer items-center justify-center rounded-full transition-all duration-200 ${
       isListening
         ? "animate-pulse bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-400"
         : "bg-gray-100 text-gray-700 hover:bg-purple-100 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300"
@@ -62,7 +62,7 @@ const SearchBox = ({
         />
         <button
           type="submit"
-          className={`flex shrink-0 items-center justify-center text-gray-600 dark:text-gray-300 ${
+          className={`flex shrink-0 cursor-pointer items-center justify-center text-gray-600 dark:text-gray-300 ${
             mobile
               ? "h-10 w-11"
               : "h-11 w-16 rounded-r-full border border-l-0 border-gray-300 bg-gray-50 hover:bg-purple-50 hover:text-purple-700 dark:border-gray-700 dark:bg-gray-800"
@@ -163,7 +163,7 @@ const Header = () => {
               >
                 <Menu size={24} />
               </button>
-              <Link to="/" className="flex items-center gap-3">
+              <Link to="/" className="flex cursor-pointer items-center gap-3">
                 <img
                   src={logo}
                   alt="DevTube"
@@ -197,7 +197,7 @@ const Header = () => {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
-                  className="rounded-full p-1 text-purple-600 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-gray-800 transition-colors"
+                  className="cursor-pointer rounded-full p-1 text-purple-600 transition-colors hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-gray-800"
                 >
                   <CircleUserRound size={32} strokeWidth={1.5} />
                 </button>

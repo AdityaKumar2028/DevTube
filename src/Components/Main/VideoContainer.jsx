@@ -25,7 +25,7 @@ const VideoContainer = () => {
           {videoData[selectedMenuOption.title].items.map((video) => (
             <Link
               to={`/watch?v=${video.id}&query=${encodeURIComponent(selectedMenuOption.query)}`}
-              className="min-w-0"
+              className="min-w-0 cursor-pointer"
               key={video.id}
             >
               <VideoCard key={video.id} props={video} />

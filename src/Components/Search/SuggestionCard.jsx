@@ -11,11 +11,11 @@ const SearchSuggestionCard = ({ searchSuggestions }) => {
         {searchSuggestions.map((data) => (
           <Link
             to={`/watch?v=${data.id.videoId}&title=${data.id.videoId}&query=${encodeURIComponent(data.snippet?.title)}`}
-            className="block min-w-0"
+            className="block min-w-0 cursor-pointer"
             key={data.id.videoId}
           >
             <li>
-              <button className="flex w-full items-center gap-3 px-4 py-2 text-left transition-colors outline-none hover:bg-gray-100 focus:bg-gray-100 sm:gap-4 sm:px-5 sm:py-2.5 dark:hover:bg-gray-800 dark:focus:bg-gray-800">
+              <button className="flex w-full cursor-pointer items-center gap-3 px-4 py-2 text-left transition-colors outline-none hover:bg-gray-100 focus:bg-gray-100 sm:gap-4 sm:px-5 sm:py-2.5 dark:hover:bg-gray-800 dark:focus:bg-gray-800">
                 <Search
                   size={18}
                   className="shrink-0 text-gray-400 dark:text-gray-500"

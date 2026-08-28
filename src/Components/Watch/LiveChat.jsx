@@ -85,7 +85,7 @@ const LiveChat = () => {
         />
         <button
           type="submit"
-          className="rounded-full bg-purple-400 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 dark:focus:ring-offset-slate-900 sm:px-4 sm:py-2.5"
+          className="cursor-pointer rounded-full bg-purple-400 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 dark:focus:ring-offset-slate-900 sm:px-4 sm:py-2.5"
         >
           Send
         </button>

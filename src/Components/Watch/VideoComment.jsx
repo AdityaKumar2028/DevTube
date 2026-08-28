@@ -21,7 +21,7 @@ const VideoComment = ({ commentData }) => {
       </div>
       {replies?.length > 0 && (
         <button
-          className="mt-2 text-sm font-medium text-blue-600"
+          className="mt-2 cursor-pointer text-sm font-medium text-blue-600"
           onClick={() => setShowReplies((prev) => !prev)}
         >
           {showReplies ? "Hide Replies" : "Show Replies"}

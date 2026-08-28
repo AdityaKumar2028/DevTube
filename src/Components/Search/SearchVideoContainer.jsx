@@ -37,7 +37,7 @@ const SearchVideoContainer = () => {
               to={`/watch?v=${video.id}&query=${encodeURIComponent(
                 video?.snippet?.title,
               )}`}
-              className="group block min-w-0 overflow-hidden rounded-xl border border-gray-100 bg-white transition-all duration-200 hover:-translate-y-0.5 hover:border-gray-200 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700"
+              className="group block min-w-0 cursor-pointer overflow-hidden rounded-xl border border-gray-100 bg-white transition-all duration-200 hover:-translate-y-0.5 hover:border-gray-200 hover:shadow-md dark:border-slate-800 dark:bg-slate-900 dark:hover:border-slate-700"
               key={video.id}
             >
               <VideoCard props={video} key={video.id} />
