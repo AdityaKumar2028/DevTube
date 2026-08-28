@@ -13,7 +13,7 @@ const VideoContainer = () => {
 
   return (
     <div
-      className={`min-h-screen bg-white transition-all duration-300 ${
+      className={`min-h-screen bg-white transition-all duration-300 dark:bg-slate-950 ${
         isNavBarOpen ? "ml-16 md:ml-48" : "ml-0"
       }`}
     >

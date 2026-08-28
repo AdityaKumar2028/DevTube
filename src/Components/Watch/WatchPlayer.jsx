@@ -37,7 +37,7 @@ const WatchPlayer = () => {
 
   return (
     <main
-      className={`p-3 sm:p-4 md:p-6 transition-all duration-300 ${isMenuOpen ? "ml-16 xl:ml-44" : ""}`}
+      className={`min-h-screen bg-white p-3 transition-all duration-300 dark:bg-slate-950 sm:p-4 md:p-6 ${isMenuOpen ? "ml-16 xl:ml-44" : ""}`}
     >
       <div className="mx-auto flex max-w-[1600px] flex-col gap-5 sm:gap-6 xl:flex-row xl:items-start">
         <section className="min-w-0 flex-1">
@@ -51,14 +51,14 @@ const WatchPlayer = () => {
             />
           </div>
 
-          <h1 className="mt-3 text-lg font-bold tracking-tight text-slate-900 sm:mt-4 sm:text-xl md:text-2xl line-clamp-2">
+          <h1 className="mt-3 line-clamp-2 text-lg font-bold tracking-tight text-slate-900 dark:text-slate-100 sm:mt-4 sm:text-xl md:text-2xl">
             {he.decode(videoTitle || "")}
           </h1>
           <WatchVideoStats props={statsprops} />
 
-          <hr className="my-5 hidden border-slate-200 md:block" />
+          <hr className="my-5 hidden border-slate-200 dark:border-slate-700 md:block" />
 
-          <h2 className="mb-4 hidden text-lg font-bold text-slate-900 sm:mb-5 sm:text-xl md:block">
+          <h2 className="mb-4 hidden text-lg font-bold text-slate-900 dark:text-slate-100 sm:mb-5 sm:text-xl md:block">
             Comments ({videoComments.length})
           </h2>
           <div className="hidden flex-col gap-4 md:flex sm:gap-6">
@@ -73,7 +73,7 @@ const WatchPlayer = () => {
             <LiveChat />
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-sm sm:p-4">
+          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-sm dark:border-slate-700 dark:bg-slate-900 sm:p-4">
             <UpNextVideos query={query} videoId={videoId} />
           </div>
         </aside>

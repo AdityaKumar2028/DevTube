@@ -5,7 +5,7 @@ const VideoComment = ({ commentData }) => {
 
   return (
     <div className="mt-3">
-      <div className="flex gap-2.5 rounded-lg bg-gray-100 p-3 sm:gap-3">
+      <div className="flex gap-2.5 rounded-lg bg-gray-100 p-3 dark:bg-slate-800 sm:gap-3">
         <img
           src={avatar}
           alt={user}
@@ -13,8 +13,8 @@ const VideoComment = ({ commentData }) => {
         />
 
         <div className="flex-1">
-          <h3 className="font-semibold text-sm">{user}</h3>
-          <p className="break-words text-sm text-gray-800 sm:text-base">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">{user}</h3>
+          <p className="break-words text-sm text-gray-800 dark:text-slate-200 sm:text-base">
             {text}
           </p>
         </div>
@@ -28,7 +28,7 @@ const VideoComment = ({ commentData }) => {
         </button>
       )}
       {showReplies && replies?.length > 0 && (
-        <div className="ml-3 mt-2 border-l-2 border-gray-300 pl-3 sm:ml-6 sm:pl-4">
+        <div className="ml-3 mt-2 border-l-2 border-gray-300 pl-3 dark:border-slate-700 sm:ml-6 sm:pl-4">
           {replies.map((reply) => (
             <VideoComment key={reply.id} commentData={reply} />
           ))}

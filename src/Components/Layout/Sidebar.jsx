@@ -15,7 +15,7 @@ const Sidebar = () => {
   if (!isMenuOpen) return null;
 
   return (
-    <aside className="fixed border left-0 top-31 md:top-17.5 z-40 h-[calc(100svh-7.75rem)] md:h-[calc(100svh-4.375rem)] w-16 overflow-y-auto border-r border-gray-200 bg-white py-3 shadow-md md:w-min md:py-4 md:shadow-none">
+    <aside className="fixed border left-0 top-31 md:top-17.5 z-40 h-[calc(100svh-7.75rem)] md:h-[calc(100svh-4.375rem)] w-16 overflow-y-auto border-r border-gray-200 bg-white py-3 text-slate-700 shadow-md dark:border-gray-800 dark:bg-slate-950 dark:text-slate-200 md:w-min md:py-4 md:shadow-none">
       <ul className="px-2 md:px-3">
         {sidebarOptions.map((item) => (
           <li
@@ -31,7 +31,7 @@ const Sidebar = () => {
               ${
                 selectedOption.title === item.title
                   ? "bg-green-400 text-white shadow-md scale-[1.02]"
-                  : "hover:bg-purple-400 hover:text-white"
+                  : "hover:bg-purple-400 hover:text-white dark:hover:bg-purple-500"
               }`}
           >
             <item.icon

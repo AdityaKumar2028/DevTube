@@ -7,11 +7,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import WatchPlayer from "./Components/Watch/WatchPlayer";
 import Sidebar from "./Components/Layout/Sidebar";
 import SearchVideoContainer from "./Components/Search/SearchVideoContainer";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Provider store={store}>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Provider store={store}>
         <Header />
         <Sidebar />
 
@@ -20,8 +22,9 @@ function App() {
           <Route path="/watch" element={<WatchPlayer />} />
           <Route path="/search" element={<SearchVideoContainer />} />
         </Routes>
-      </Provider>
-    </BrowserRouter>
+        </Provider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

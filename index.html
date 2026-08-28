@@ -4,6 +4,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./src/assets/logo.png" />
     <title>DevTube</title>
+    <script>
+      try {
+        if (localStorage.getItem("devtube-theme") === "dark") {
+          document.documentElement.classList.add("dark");
+          document.documentElement.style.colorScheme = "dark";
+        }
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
