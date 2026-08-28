@@ -14,7 +14,9 @@ const VideoComment = ({ commentData }) => {
 
         <div className="flex-1">
           <h3 className="font-semibold text-sm">{user}</h3>
-          <p className="break-words text-sm text-gray-800 sm:text-base">{text}</p>
+          <p className="break-words text-sm text-gray-800 sm:text-base">
+            {text}
+          </p>
         </div>
       </div>
       {replies?.length > 0 && (

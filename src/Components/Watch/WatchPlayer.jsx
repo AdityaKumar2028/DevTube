@@ -1,20 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import he from "he";
-import VideoCard from "../Layout/VideoCard";
 import VideoComment from "./VideoComment";
 import LiveChat from "./LiveChat";
-import {
-  formatDuration,
-  formatPublishedDate,
-  formatViews,
-} from "../../utils/Constants";
 
 import { useVideoComments } from "../../hooks/useVideoComments";
-import { removeLiveComments } from "../../utils/liveCommentsSlice";
-import useWatchVideo from "../../hooks/useWatchVideo";
-import { setMenuOption } from "../../utils/appSlice";
-import { useEffect } from "react";
+import { useWatchVideo } from "../../hooks/useWatchVideo";
+import UpNextVideos from "./upNextVideos";
+import WatchVideoStats from "./watchVideoStats";
 
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
@@ -30,9 +23,17 @@ const WatchPlayer = () => {
 
   if (!videoData || !videoComments || !videoId) return null;
 
-  const { title: videoTitle, publishTime } = videoData.snippet;
+  const { title: videoTitle, publishedAt } = videoData.snippet;
   const { duration } = videoData.contentDetails;
   const { viewCount, likeCount, commentCount } = videoData.statistics;
+
+  const statsprops = {
+    publishTime: publishedAt,
+    duration: duration,
+    viewCount: viewCount,
+    likeCount: likeCount,
+    commentCount: commentCount,
+  };
 
   return (
     <main className={`p-3 sm:p-4 md:p-6 ${isMenuOpen ? "ml-16 xl:ml-44" : ""}`}>
@@ -51,23 +52,7 @@ const WatchPlayer = () => {
           <h1 className="mt-3 max-w-4xl text-lg font-bold tracking-tight text-slate-900 sm:mt-4 sm:text-xl md:text-2xl line-clamp-2">
             {he.decode(videoTitle || "")}
           </h1>
-          <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs font-medium text-slate-700 sm:gap-2 sm:text-sm">
-            <span className="rounded-full bg-slate-100 px-2.5 py-1 sm:px-3 sm:py-1.5">
-              {formatViews(viewCount)} views
-            </span>
-            <span className="rounded-full bg-slate-100 px-2.5 py-1 sm:px-3 sm:py-1.5">
-              {formatPublishedDate(publishTime)}
-            </span>
-            <span className="rounded-full bg-slate-100 px-2.5 py-1 sm:px-3 sm:py-1.5">
-              👍 {formatViews(likeCount)}
-            </span>
-            <span className="rounded-full bg-slate-100 px-2.5 py-1 sm:px-3 sm:py-1.5">
-              {formatViews(commentCount)} comments
-            </span>
-            <span className="rounded-full bg-slate-100 px-2.5 py-1 sm:px-3 sm:py-1.5">
-              ⏱ {formatDuration(duration)}
-            </span>
-          </div>
+          <WatchVideoStats props={statsprops} />
 
           <hr className="my-5 hidden border-slate-200 md:block" />
 
@@ -79,6 +64,9 @@ const WatchPlayer = () => {
               <VideoComment key={data?.id || index} commentData={data} />
             ))}
           </div>
+        </section>
+        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <UpNextVideos query={query} />
         </section>
 
         <aside className="flex w-full shrink-0 flex-col gap-5 xl:sticky xl:top-20 xl:w-100">

@@ -4,8 +4,8 @@ const videosSlice = createSlice({
   name: "videos",
   initialState: {
     mainVideos: {},
-    watchVideo: {},
-    watchNextVideos: {},
+    watchVideo: null,
+    watchNextVideos: null,
     videoComments: null,
   },
   reducers: {

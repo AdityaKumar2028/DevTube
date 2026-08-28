@@ -3,7 +3,7 @@ import getMainVideos from "../api/getMainVideos";
 import { useDispatch } from "react-redux";
 import { setWatchNextVideos } from "../utils/videosSlice";
 
-const useWatchNextVideos = (query) => {
+export const useWatchNextVideos = (query) => {
   const dispatch = useDispatch();
   useEffect(() => {
     const getNextVideos = async () => {
@@ -15,5 +15,3 @@ const useWatchNextVideos = (query) => {
     getNextVideos();
   }, [dispatch, query]);
 };
-
-export default useWatchNextVideos;
