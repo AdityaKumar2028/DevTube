@@ -36,10 +36,12 @@ const WatchPlayer = () => {
   };
 
   return (
-    <main className={`p-3 sm:p-4 md:p-6 ${isMenuOpen ? "ml-16 xl:ml-44" : ""}`}>
-      <div className="mx-auto flex max-w-[1600px] flex-col gap-5 sm:gap-6 xl:flex-row">
+    <main
+      className={`p-3 sm:p-4 md:p-6 transition-all duration-300 ${isMenuOpen ? "ml-16 xl:ml-44" : ""}`}
+    >
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-5 sm:gap-6 xl:flex-row xl:items-start">
         <section className="min-w-0 flex-1">
-          <div className="mx-auto aspect-video w-full overflow-hidden rounded-xl bg-black shadow-[0_12px_32px_rgba(15,23,42,0.18)] sm:rounded-2xl xl:w-[min(100%,calc(62svh*16/9))] xl:max-w-4xl">
+          <div className="mx-auto aspect-video w-full overflow-hidden rounded-xl bg-black shadow-sm sm:rounded-2xl">
             <iframe
               className="h-full w-full"
               src={`https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1`}
@@ -49,7 +51,7 @@ const WatchPlayer = () => {
             />
           </div>
 
-          <h1 className="mt-3 max-w-4xl text-lg font-bold tracking-tight text-slate-900 sm:mt-4 sm:text-xl md:text-2xl line-clamp-2">
+          <h1 className="mt-3 text-lg font-bold tracking-tight text-slate-900 sm:mt-4 sm:text-xl md:text-2xl line-clamp-2">
             {he.decode(videoTitle || "")}
           </h1>
           <WatchVideoStats props={statsprops} />
@@ -65,12 +67,15 @@ const WatchPlayer = () => {
             ))}
           </div>
         </section>
-        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-          <UpNextVideos query={query} />
-        </section>
 
-        <aside className="flex w-full shrink-0 flex-col gap-5 xl:sticky xl:top-20 xl:w-100">
-          <LiveChat />
+        <aside className="flex w-full shrink-0 flex-col gap-5 xl:w-[350px] 2xl:w-[400px]">
+          <div className="w-full">
+            <LiveChat />
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-sm sm:p-4">
+            <UpNextVideos query={query} />
+          </div>
         </aside>
       </div>
     </main>
