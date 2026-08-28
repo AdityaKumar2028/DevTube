@@ -10,7 +10,7 @@ import {
   BriefcaseBusiness,
 } from "lucide-react";
 
-export const liveCommentsOffset = 777;
+export const liveCommentsOffset = 1100;
 export const liveChatSize = 50;
 export const debounce_timer = 300;
 

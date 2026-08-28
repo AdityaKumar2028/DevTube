@@ -6,10 +6,9 @@ import {
 import he from "he";
 
 const VideoCard = ({ props }) => {
-  const { snippet } = props.searchData;
   const { statistics, contentDetails } = props;
 
-  const { title, publishedAt, thumbnails } = snippet;
+  const { title, publishedAt, thumbnails } = props.snippet;
   const { viewCount } = statistics;
   const { duration } = contentDetails;
 

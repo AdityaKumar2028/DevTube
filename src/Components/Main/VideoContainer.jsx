@@ -19,7 +19,7 @@ const VideoContainer = () => {
     >
       <div className="px-3 py-4 sm:px-5 md:px-6 md:py-5">
         <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 sm:gap-5 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-          {videoData[selectedMenuOption.title].map((video) => (
+          {videoData[selectedMenuOption.title].items.map((video) => (
             <Link
               to={`/watch?v=${video.id}&title=${encodeURIComponent(
                 selectedMenuOption.title,

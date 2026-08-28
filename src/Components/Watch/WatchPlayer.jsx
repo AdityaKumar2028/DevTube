@@ -9,9 +9,12 @@ import {
   formatPublishedDate,
   formatViews,
 } from "../../utils/Constants";
+
 import { useVideoComments } from "../../hooks/useVideoComments";
-import { useMainVideos } from "../../hooks/useMainVideos";
 import { removeLiveComments } from "../../utils/liveCommentsSlice";
+import useWatchVideo from "../../hooks/useWatchVideo";
+import { setMenuOption } from "../../utils/appSlice";
+import { useEffect } from "react";
 
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
@@ -19,24 +22,28 @@ const WatchPlayer = () => {
   const title = searchParams.get("title") || "";
   const query = searchParams.get("query") || "";
 
+  useVideoComments(videoId);
+  useWatchVideo(videoId);
+
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const videoComments = useSelector((store) => store.videos.videoComments);
-  const mainVideos = useSelector((store) => store.videos.mainVideos);
-
-  useVideoComments(videoId);
-  useMainVideos(title, query);
+  const watchVideo = useSelector((store) => store.videos.watchVideo);
+  const recommendedVideos = useSelector(
+    (store) => store.videos.watchNextVideos,
+  );
 
   const dispatch = useDispatch();
 
-  const videoData = mainVideos?.[title]?.find((data) => data.id === videoId);
+  const videoData = watchVideo;
+  useEffect(() => {
+    dispatch(setMenuOption({ title, query }));
+  }, [title, query, dispatch]);
 
   if (!videoData || !videoComments || !videoId) return null;
 
-  const { title: videoTitle, publishTime } = videoData.searchData.snippet;
+  const { title: videoTitle, publishTime } = videoData.snippet;
   const { duration } = videoData.contentDetails;
   const { viewCount, likeCount, commentCount } = videoData.statistics;
-  const recommendedVideos =
-    mainVideos?.[title]?.filter((data) => data.id !== videoId) || [];
 
   return (
     <main className={`p-3 sm:p-4 md:p-6 ${isMenuOpen ? "ml-16 xl:ml-44" : ""}`}>
@@ -92,7 +99,7 @@ const WatchPlayer = () => {
             <div className="border-b border-purple-100 bg-purple-50 px-4 py-3">
               <h2 className="text-base font-bold text-slate-900">Up next</h2>
             </div>
-            <div className="h-80 space-y-3 overflow-y-auto p-3 pr-2 sm:h-96 xl:h-[calc(100svh-8rem)] [scrollbar-color:#a78bfa_transparent] scrollbar-width-thin [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-300 [&::-webkit-scrollbar-thumb]:hover:bg-purple-400 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-1.5">
+            {/* <div className="h-80 space-y-3 overflow-y-auto p-3 pr-2 sm:h-96 xl:h-[calc(100svh-8rem)] [scrollbar-color:#a78bfa_transparent] scrollbar-width-thin [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-300 [&::-webkit-scrollbar-thumb]:hover:bg-purple-400 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-1.5">
               {recommendedVideos.map((data) => (
                 <Link
                   className="block max-w-full overflow-hidden rounded-lg [&>div]:w-full"
@@ -103,7 +110,7 @@ const WatchPlayer = () => {
                   <VideoCard props={data} />
                 </Link>
               ))}
-            </div>
+            </div> */}
           </section>
         </aside>
       </div>

@@ -41,7 +41,7 @@ const SearchBox = ({
         focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600
         dark:border-gray-700 dark:bg-gray-900 dark:focus-within:border-purple-500
         dark:focus-within:ring-purple-500 ${
-          mobile ? "rounded-full" : "rounded-l-full"
+          mobile ? "rounded-full" : "rounded-full"
         }`}
       >
         <input
@@ -94,11 +94,9 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed left-0 top-0 z-50 w-full">
+      <header className="fixed left-0 top-0 z-50 w-full shadow-md">
         <div className="border-b border-gray-200 bg-white/90 backdrop-blur-md dark:border-gray-800 dark:bg-gray-950/90">
-          {/* Main Header */}
           <div className="flex h-16 items-center justify-between gap-3 px-3 sm:h-17.5 sm:px-6">
-            {/* Left */}
             <div className="flex shrink-0 items-center gap-2 sm:gap-4">
               <button
                 onClick={() => dispatch(toggleMenu())}
@@ -109,12 +107,13 @@ const Header = () => {
                 <Menu size={24} />
               </button>
 
-              <Link to="/">
+              <Link to="/" className="flex items-center gap-3">
                 <img
                   src={logo}
                   alt="DevTube"
                   className="h-8 object-contain sm:h-10"
                 />
+                <h1 className="text-purple-600 font-bold text-xl">DevTube</h1>
               </Link>
             </div>
             <div className="hidden flex-1 items-center justify-center px-8 md:flex">
