@@ -2,6 +2,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { useSearchResults } from "../../hooks/useSearchResults";
 import { useSelector } from "react-redux";
 import VideoCard from "../Layout/VideoCard";
+import { SearchContainerShimmer } from "../Shimmer";
 
 const SearchVideoContainer = () => {
   const [params] = useSearchParams();
@@ -12,7 +13,9 @@ const SearchVideoContainer = () => {
   const searchResult = useSelector((store) => store.search.searchResults);
   const isNavBarOpen = useSelector((store) => store.app.isMenuOpen);
 
-  if (!searchResult) return null;
+  if (!searchResult) {
+    return <SearchContainerShimmer isSidebarOpen={isNavBarOpen} />;
+  }
 
   console.log(searchResult);
 

@@ -3,10 +3,11 @@ import logo from "../../assets/logo.png";
 import { Search, Moon, Sun, Menu, CircleUserRound, Mic } from "lucide-react";
 import { toggleMenu } from "../../utils/appSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSearchSuggestions } from "../../hooks/useSearchSuggestions";
 import SearchSuggestionCard from "../Search/SuggestionCard";
 import { useTheme } from "../../hooks/useTheme";
+import DropDown from "./DropDown"; // Importing your new DropDown component
 
 const iconBtn =
   "rounded-full p-2.5 text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800";
@@ -89,11 +90,26 @@ const Header = () => {
   const recognitionRef = useRef(null);
   const { theme, toggleTheme } = useTheme();
 
+  // Dropdown state and ref
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const dropdownRef = useRef(null);
+
   useSearchSuggestions(query);
   const searchSuggestions = useSelector(
     (store) => store.search.searchSuggestions,
   );
   const suggestions = searchSuggestions[query] || [];
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowProfileMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleVoiceSearch = () => {
     if (isListening && recognitionRef.current) {
@@ -176,9 +192,20 @@ const Header = () => {
               >
                 {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
               </button>
-              <button className="rounded-full p-1 text-purple-600 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-gray-800">
-                <CircleUserRound size={32} strokeWidth={1.5} />
-              </button>
+
+              {/* Profile Dropdown Wrapper */}
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setShowProfileMenu(!showProfileMenu)}
+                  className="rounded-full p-1 text-purple-600 hover:bg-purple-50 dark:text-purple-400 dark:hover:bg-gray-800 transition-colors"
+                >
+                  <CircleUserRound size={32} strokeWidth={1.5} />
+                </button>
+
+                {showProfileMenu && (
+                  <DropDown setShowProfileMenu={setShowProfileMenu} />
+                )}
+              </div>
             </div>
           </div>
 

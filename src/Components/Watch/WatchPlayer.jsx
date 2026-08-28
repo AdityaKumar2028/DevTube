@@ -8,6 +8,7 @@ import { useVideoComments } from "../../hooks/useVideoComments";
 import { useWatchVideo } from "../../hooks/useWatchVideo";
 import UpNextVideos from "./upNextVideos";
 import WatchVideoStats from "./watchVideoStats";
+import { WatchPlayerShimmer } from "../Shimmer";
 
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
@@ -21,7 +22,9 @@ const WatchPlayer = () => {
   const videoComments = useSelector((store) => store.videos.videoComments);
   const videoData = useSelector((store) => store.videos.watchVideo);
 
-  if (!videoData || !videoComments || !videoId) return null;
+  if (!videoData || !videoComments || !videoId) {
+    return <WatchPlayerShimmer isSidebarOpen={isMenuOpen} />;
+  }
 
   const { title: videoTitle, publishedAt } = videoData.snippet;
   const { duration } = videoData.contentDetails;

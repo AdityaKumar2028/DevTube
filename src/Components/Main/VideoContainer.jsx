@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import VideoCard from "../Layout/VideoCard";
 import { Link } from "react-router-dom";
+import { VideoContainerShimmer } from "../Shimmer";
 
 const VideoContainer = () => {
   const videoData = useSelector((store) => store.videos.mainVideos);
@@ -9,7 +10,9 @@ const VideoContainer = () => {
   );
   const isNavBarOpen = useSelector((store) => store.app.isMenuOpen);
 
-  if (!videoData[selectedMenuOption.title]) return null;
+  if (!videoData[selectedMenuOption.title]) {
+    return <VideoContainerShimmer isSidebarOpen={isNavBarOpen} />;
+  }
 
   return (
     <div

@@ -3,6 +3,7 @@ import { removeLiveComments } from "../../utils/liveCommentsSlice";
 import { Link } from "react-router-dom";
 import VideoCard from "../Layout/VideoCard";
 import { useWatchNextVideos } from "../../hooks/useWatchNextVideos";
+import { UpNextVideosShimmer } from "../Shimmer";
 
 const UpNextVideos = ({ query, videoId }) => {
   console.log(videoId);
@@ -11,7 +12,7 @@ const UpNextVideos = ({ query, videoId }) => {
   const recommendedVideos = useSelector(
     (store) => store.videos.watchNextVideos,
   );
-  if (!recommendedVideos) return null;
+  if (!recommendedVideos) return <UpNextVideosShimmer />;
   console.log(videoId);
 
   return (
