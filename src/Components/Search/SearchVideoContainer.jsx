@@ -14,6 +14,8 @@ const SearchVideoContainer = () => {
 
   if (!searchResult) return null;
 
+  console.log(searchResult);
+
   return (
     <div
       className={`min-h-screen bg-white transition-all duration-300 ${
@@ -27,13 +29,13 @@ const SearchVideoContainer = () => {
         </p>
 
         <div className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-          {searchResult.map((video) => (
+          {searchResult.items.map((video) => (
             <Link
-              to={`/watch?v=${video.id}&title=${video.id}&query=${encodeURIComponent(
-                video.searchData?.snippet?.title,
+              to={`/watch?v=${video.id.videoId}&query=${encodeURIComponent(
+                video?.snippet?.title,
               )}`}
               className="group block min-w-0 overflow-hidden rounded-xl border border-gray-100 bg-white transition-all duration-200 hover:-translate-y-0.5 hover:border-gray-200 hover:shadow-md"
-              key={video.id}
+              key={video.id.videoId}
             >
               <VideoCard props={video} />
             </Link>

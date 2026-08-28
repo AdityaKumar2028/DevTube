@@ -74,7 +74,7 @@ const WatchPlayer = () => {
           </div>
 
           <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-sm sm:p-4">
-            <UpNextVideos query={query} />
+            <UpNextVideos query={query} videoId={videoId} />
           </div>
         </aside>
       </div>
