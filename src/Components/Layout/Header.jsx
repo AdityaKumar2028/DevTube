@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 import { Search, Moon, Menu, CircleUserRound, Mic } from "lucide-react";
 import { toggleMenu } from "../../utils/appSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useSearchSuggestions } from "../../hooks/useSearchSuggestions";
 import SearchSuggestionCard from "../Search/SuggestionCard";
 
@@ -40,9 +40,7 @@ const SearchBox = ({
         className={`flex w-full overflow-hidden border border-gray-300 bg-white
         focus-within:border-purple-600 focus-within:ring-1 focus-within:ring-purple-600
         dark:border-gray-700 dark:bg-gray-900 dark:focus-within:border-purple-500
-        dark:focus-within:ring-purple-500 ${
-          mobile ? "rounded-full" : "rounded-full"
-        }`}
+        dark:focus-within:ring-purple-500 rounded-full`}
       >
         <input
           value={query}
@@ -80,9 +78,14 @@ const SearchBox = ({
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [query, setQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+
+  // Ref to hold the speech recognition instance
+  const recognitionRef = useRef(null);
 
   useSearchSuggestions(query);
 
@@ -91,6 +94,52 @@ const Header = () => {
   );
 
   const suggestions = searchSuggestions[query] || [];
+
+  const handleVoiceSearch = () => {
+    // If already listening, stop the recognition manually
+    if (isListening && recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+      return;
+    }
+
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Your browser does not support voice search. Try Chrome or Edge.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognitionRef.current = recognition;
+
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setQuery(transcript);
+      // Automatically trigger search after speech is transcribed
+      navigate(`/search?q=${encodeURIComponent(transcript)}`);
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error", event.error);
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.start();
+  };
 
   return (
     <>
@@ -113,9 +162,10 @@ const Header = () => {
                   alt="DevTube"
                   className="h-8 object-contain sm:h-10"
                 />
-                <h1 className="text-purple-600 font-bold text-xl">DevTube</h1>
+                <h1 className="text-xl font-bold text-purple-600">DevTube</h1>
               </Link>
             </div>
+
             <div className="hidden flex-1 items-center justify-center px-8 md:flex">
               <SearchBox
                 query={query}
@@ -126,9 +176,13 @@ const Header = () => {
               />
 
               <button
-                className="ml-4 flex h-11 w-11 shrink-0 items-center justify-center
-                rounded-full bg-gray-100 text-gray-700 hover:bg-purple-100
-                hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300"
+                onClick={handleVoiceSearch}
+                className={`ml-4 flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-all duration-200 ${
+                  isListening
+                    ? "animate-pulse bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-400"
+                    : "bg-gray-100 text-gray-700 hover:bg-purple-100 hover:text-purple-700 dark:bg-gray-800 dark:text-gray-300"
+                }`}
+                title={isListening ? "Listening..." : "Search with voice"}
                 aria-label="Search with voice"
               >
                 <Mic size={20} />
@@ -163,9 +217,13 @@ const Header = () => {
             />
 
             <button
-              className="flex h-10 w-10 shrink-0 items-center justify-center
-              rounded-full bg-gray-100 text-gray-700 dark:bg-gray-800
-              dark:text-gray-300"
+              onClick={handleVoiceSearch}
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-200 ${
+                isListening
+                  ? "animate-pulse bg-red-100 text-red-600 dark:bg-red-900/50 dark:text-red-400"
+                  : "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+              }`}
+              title={isListening ? "Listening..." : "Search with voice"}
               aria-label="Search with voice"
             >
               <Mic size={18} />
