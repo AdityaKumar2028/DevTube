@@ -19,7 +19,6 @@ import { useEffect } from "react";
 const WatchPlayer = () => {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
-  const title = searchParams.get("title") || "";
   const query = searchParams.get("query") || "";
 
   useVideoComments(videoId);
@@ -27,17 +26,7 @@ const WatchPlayer = () => {
 
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const videoComments = useSelector((store) => store.videos.videoComments);
-  const watchVideo = useSelector((store) => store.videos.watchVideo);
-  const recommendedVideos = useSelector(
-    (store) => store.videos.watchNextVideos,
-  );
-
-  const dispatch = useDispatch();
-
-  const videoData = watchVideo;
-  useEffect(() => {
-    dispatch(setMenuOption({ title, query }));
-  }, [title, query, dispatch]);
+  const videoData = useSelector((store) => store.videos.watchVideo);
 
   if (!videoData || !videoComments || !videoId) return null;
 
@@ -94,24 +83,6 @@ const WatchPlayer = () => {
 
         <aside className="flex w-full shrink-0 flex-col gap-5 xl:sticky xl:top-20 xl:w-100">
           <LiveChat />
-
-          <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-            <div className="border-b border-purple-100 bg-purple-50 px-4 py-3">
-              <h2 className="text-base font-bold text-slate-900">Up next</h2>
-            </div>
-            {/* <div className="h-80 space-y-3 overflow-y-auto p-3 pr-2 sm:h-96 xl:h-[calc(100svh-8rem)] [scrollbar-color:#a78bfa_transparent] scrollbar-width-thin [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-purple-300 [&::-webkit-scrollbar-thumb]:hover:bg-purple-400 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-1.5">
-              {recommendedVideos.map((data) => (
-                <Link
-                  className="block max-w-full overflow-hidden rounded-lg [&>div]:w-full"
-                  key={data.id}
-                  onClick={() => dispatch(removeLiveComments())}
-                  to={`/watch?v=${data.id}&title=${encodeURIComponent(title)}&query=${encodeURIComponent(query)}`}
-                >
-                  <VideoCard props={data} />
-                </Link>
-              ))}
-            </div> */}
-          </section>
         </aside>
       </div>
     </main>

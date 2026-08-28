@@ -21,9 +21,7 @@ const VideoContainer = () => {
         <div className="grid grid-cols-1 gap-4 min-[480px]:grid-cols-2 sm:gap-5 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {videoData[selectedMenuOption.title].items.map((video) => (
             <Link
-              to={`/watch?v=${video.id}&title=${encodeURIComponent(
-                selectedMenuOption.title,
-              )}&query=${encodeURIComponent(selectedMenuOption.query)}`}
+              to={`/watch?v=${video.id}&query=${encodeURIComponent(selectedMenuOption.query)}`}
               className="min-w-0"
               key={video.id}
             >
