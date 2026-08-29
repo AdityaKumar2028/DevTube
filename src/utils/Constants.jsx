@@ -10,6 +10,31 @@ import {
   BriefcaseBusiness,
 } from "lucide-react";
 
+import { FaGithub, FaLinkedin, FaEnvelope, FaCode } from "react-icons/fa";
+
+export const profileLinks = [
+  {
+    name: "GitHub",
+    url: "https://github.com/AdityaKumar2028",
+    icon: FaGithub,
+  },
+  {
+    name: "LinkedIn",
+    url: "https://linkedin.com/in/aditya-kumar-888314328",
+    icon: FaLinkedin,
+  },
+  {
+    name: "LeetCode",
+    url: "https://leetcode.com/adityakumar2028",
+    icon: FaCode,
+  },
+  {
+    name: "Email",
+    url: "https://mail.google.com/mail/?view=cm&fs=1&to=adityakumar2k28@gmail.com",
+    icon: FaEnvelope,
+  },
+];
+
 export const liveCommentsOffset = 1100;
 export const liveChatSize = 50;
 export const debounce_timer = 300;
