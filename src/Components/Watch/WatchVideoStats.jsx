@@ -4,7 +4,6 @@ import {
   formatDuration,
 } from "../../utils/Constants";
 const WatchVideoStats = ({ props }) => {
-  console.log(props);
   const { viewCount, publishTime, likeCount, commentCount, duration } = props;
   return (
     <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 sm:gap-2 sm:text-sm">

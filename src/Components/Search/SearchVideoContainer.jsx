@@ -17,8 +17,6 @@ const SearchVideoContainer = () => {
     return <SearchContainerShimmer isSidebarOpen={isNavBarOpen} />;
   }
 
-  console.log(searchResult);
-
   return (
     <div
       className={`min-h-screen bg-white transition-all duration-300 dark:bg-slate-950 ${

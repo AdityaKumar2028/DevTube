@@ -8,7 +8,6 @@ export const useWatchNextVideos = (query) => {
   useEffect(() => {
     const getNextVideos = async () => {
       const videoResult = await getMainVideos(query);
-      console.log(videoResult);
       dispatch(setWatchNextVideos(videoResult));
     };
 
